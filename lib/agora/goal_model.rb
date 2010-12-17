@@ -31,6 +31,36 @@ module Agora
     
     end # module Goal
 
+    # Marker for expectations
+    module Expectation
+    
+      DOT_ATTRIBUTES = {
+        :shape => "parallelogram",
+        :style => "filled",
+        :fillcolor => "#FFDE3F",
+        :fontname => "Helvetica",
+        :fontsize => 12.0,
+        :margin => "0.1, 0.001",
+        :penwidth => 2.0
+      }
+    
+    end # module Goal
+
+    # Marker for requirements
+    module Requirement
+    
+      DOT_ATTRIBUTES = {
+        :shape => "parallelogram",
+        :style => "filled",
+        :fillcolor => "#D7E6EE",
+        :fontname => "Helvetica",
+        :fontsize => 12.0,
+        :margin => "0.1, 0.001",
+        :penwidth => 2.0
+      }
+    
+    end # module Requirement
+
     # Marker for domain hypotheses
     module DomainHypothesis
     
