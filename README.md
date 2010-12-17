@@ -1,31 +1,31 @@
-= agora
+# Agora
 
 http://github.com/blambeau/agora
 
-== DESCRIPTION:
+## Description
 
 Agile Goal-Oriented Requirement Acquisition
 
-== FEATURES/PROBLEMS:
+## Features/Problems
 
 * In generated dot graphs, the left-to-right ordering of subgoals in refinements may not follow what is 
   declared in the YAML file. The reason is that goal nodes are created first, from unordered keys of a Hash.
   (This is not the case ruby >= 1.9 fixes the problem as Hash keys are then ordered, providing a easy way to fix 
   this)
 
-== SYNOPSIS:
+## Synopsis
 
 agora GOALMODEL.ago | dot -Tgif -o GOALMODEL.gif
 
-== REQUIREMENTS:
+## Requirements
 
 * yargi >= 0.1.1
 
-== INSTALL:
+## Install
 
 sudo gem install agora
 
-== LICENSE:
+## Licence
 
 (The MIT License)
 
