@@ -6,16 +6,13 @@
 
 Agora (Agile Goal-Oriented Requirement Acquisition) aims at helping KAOS adopters (Keep All Objectives Satisfied) by providing agile tools around aquisition of requirement models, and goal models in particular. It provides pragmatic tools to write such models, present them, analyze them, and so on.
 
-## Features/Problems
+Where to start? Try the command below. Have a look at the generated image, as well as the minepump.ago file. Enjoy!
 
-* In generated dot graphs, the left-to-right ordering of subgoals in refinements may not follow what is 
-  declared in the YAML file. The reason is that goal nodes are created first, from unordered keys of a Hash.
-  (This is not the case ruby >= 1.9 fixes the problem as Hash keys are then ordered, providing a easy way to fix 
-  this)
+    ./bin/agora examples/minepump.ago | dot -Tgif -o examples/minepump.gif
 
 ## Synopsis
 
-    agora GOALMODEL.ago | dot -Tgif -o GOALMODEL.gif
+    agora --help
 
 ## Requirements
 
@@ -24,6 +21,13 @@ Agora (Agile Goal-Oriented Requirement Acquisition) aims at helping KAOS adopter
 ## Install
 
     sudo gem install agora
+
+## Features/Problems
+
+* In generated dot graphs, the left-to-right ordering of subgoals in refinements may not follow what is 
+  declared in the YAML file. The reason is that goal nodes are created first, from unordered keys of a Hash.
+  (This is not the case ruby >= 1.9 fixes the problem as Hash keys are then ordered, providing a easy way to fix 
+  this)
 
 ## Licence
 
