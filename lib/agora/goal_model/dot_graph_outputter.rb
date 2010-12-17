@@ -16,7 +16,7 @@ module Agora
         # under construction (missing goal entry for refinement subgoal,
         # in particular)
         goal_nodes = Hash.new{|h,k|
-          kind = @model.goalkind(k)
+          kind = @model.kind_of(k)
           h[k] = graph.add_vertex(
             kind, 
             kind::DOT_ATTRIBUTES,
@@ -33,7 +33,7 @@ module Agora
         @model.each_goal do |goal|
         
           # refinements
-          @model.each_goal_refinement(goal) do |ref|
+          @model.each_refinement(goal) do |ref|
           
             # refinement bullet
             refn = graph.add_vertex(
@@ -68,6 +68,38 @@ module Agora
           end # assignments
         
         end # refinements and assignments
+    
+        # create all nodes for obstacles
+        @model.each_obstacle do |obs|
+          obsn = goal_nodes[obs]
+          if og = @model.obstructed_goal(obs)
+            goaln = goal_nodes[og]
+            faken = graph.add_vertex(
+              GoalModel::Fake,
+              GoalModel::Fake::DOT_ATTRIBUTES,
+            )
+            graph.connect(obsn, faken, :arrowhead => "none")
+            graph.connect(faken, goaln, :arrowhead => "veetee")
+          end
+        end
+        @model.each_obstacle do |obs|
+          obsn = goal_nodes[obs]
+          @model.each_refinement(obs) do |ref|
+          
+            # refinement bullet
+            refn = graph.add_vertex(
+              GoalModel::AndRefinement,
+              GoalModel::AndRefinement::DOT_ATTRIBUTES,
+              :fillcolor => "#FF9D80")
+            graph.connect(refn, obsn)
+        
+            # connect subgoals
+            @model.each_refinement_subgoal(ref) do |subgoal|
+              graph.connect(goal_nodes[subgoal], refn, :arrowhead => "none")
+            end
+        
+          end # refinements
+        end # obstacles
     
         graph
       end

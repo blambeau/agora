@@ -3,7 +3,7 @@ module Agora
 
     DOT_ATTRIBUTES = {
       :rankdir => "BT", 
-      :ranksep => "0.2",
+      :ranksep => 0.2,
       # :nodesep => 0.2
     }
     
@@ -21,12 +21,13 @@ module Agora
     module Goal
     
       DOT_ATTRIBUTES = {
-        :shape => "parallelogram",
+        :shape => "polygon",
+        :skew => 0.3,
+        :margin => "0", 
         :style => "filled",
         :fillcolor => "#D7E6EE",
         :fontname => "Helvetica",
         :fontsize => 12.0,
-        :margin => "0.1, 0.001" 
       }
     
     end # module Goal
@@ -35,12 +36,13 @@ module Agora
     module Expectation
     
       DOT_ATTRIBUTES = {
-        :shape => "parallelogram",
+        :shape => "polygon",
+        :skew => 0.3,
+        :margin => "0",
         :style => "filled",
         :fillcolor => "#FFDE3F",
         :fontname => "Helvetica",
         :fontsize => 12.0,
-        :margin => "0.1, 0.001",
         :penwidth => 2.0
       }
     
@@ -50,12 +52,13 @@ module Agora
     module Requirement
     
       DOT_ATTRIBUTES = {
-        :shape => "parallelogram",
+        :shape => "polygon",
+        :skew => 0.3,
+        :margin => "0",
         :style => "filled",
         :fillcolor => "#D7E6EE",
         :fontname => "Helvetica",
         :fontsize => 12.0,
-        :margin => "0.1, 0.001",
         :penwidth => 2.0
       }
     
@@ -135,6 +138,39 @@ module Agora
       }
 
     end # module Assignment
+    
+    # Marker for obstacles
+    module Obstacle
+    
+      DOT_ATTRIBUTES = {
+        :shape => "polygon",
+        :skew => -0.3,
+        :margin => "0",
+        :style => "filled",
+        :fillcolor => "#FF9D80",
+        :fontname => "Helvetica",
+        :fontsize => 12.0,
+      }
+    
+    end # module Obstacle
+
+    # Marker for expectations
+    module Fake
+
+      DOT_ATTRIBUTES = {
+        :shape => "circle",
+        :margin => "0",
+        :fixedsize => true,
+        :width => 0.001,
+        :height => 0.001,
+        :visible => false,
+        :style => "filled",
+        :fillcolor => "white",
+        :color => 'white',
+        :label => ""
+      }
+
+    end 
     
   end # module GoalModel
 end # module Agora
