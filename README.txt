@@ -8,13 +8,18 @@ Agile Goal-Oriented Requirement Acquisition
 
 == FEATURES/PROBLEMS:
 
+* In generated dot graphs, the left-to-right ordering of subgoals in refinements may not follow what is 
+  declared in the YAML file. The reason is that goal nodes are created first, from unordered keys of a Hash.
+  (This is not the case ruby >= 1.9 fixes the problem as Hash keys are then ordered, providing a easy way to fix 
+  this)
+
 == SYNOPSIS:
 
-agora --help
+agora GOALMODEL.ago | dot -Tgif -o GOALMODEL.gif
 
 == REQUIREMENTS:
 
-* yargi >= 0.1.2
+* yargi >= 0.1.1
 
 == INSTALL:
 

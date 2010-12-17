@@ -1,3 +1,17 @@
 #!/usr/bin/env ruby
+begin
+  require "agora"
+rescue LoadError => ex
+  $LOAD_PATH.unshift(File.expand_path("../../lib", __FILE__))
+  require "agora"
+end
 
-abort "you need to write me"
+unless ARGV.size == 1
+  puts "Usage: agora MODEL.ago"
+else
+  file  = ARGV[0]
+  model = Agora::GoalModel::YAMLBased.parse_file(file)
+  graph = Agora::GoalModel::DotGraphOutputter.new(model).run
+  puts graph.to_dot
+end
+
