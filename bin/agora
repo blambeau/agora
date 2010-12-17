@@ -10,7 +10,7 @@ unless ARGV.size == 1
   puts "Usage: agora MODEL.ago"
 else
   file  = ARGV[0]
-  model = Agora::GoalModel::YAMLBased.parse_file(file)
+  model = Agora::GoalModel.yaml_file_load(file)
   graph = Agora::GoalModel::DotGraphOutputter.new(model).run
   puts graph.to_dot
 end
