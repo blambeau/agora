@@ -1,10 +1,10 @@
 # Agora
 
-http://github.com/blambeau/agora
+* http://github.com/blambeau/agora
 
 ## Description
 
-Agile Goal-Oriented Requirement Acquisition
+Agora (Agile Goal-Oriented Requirement Acquisition) aims at helping KAOS adopters (Keep All Objectives Satisfied) by providing agile tools around aquisition of requirement models, and goal models in particular. It provides pragmatic tools to write such models, present them, analyze them, and so on.
 
 ## Features/Problems
 
