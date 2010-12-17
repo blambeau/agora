@@ -9,20 +9,24 @@ module Agora
       def run
         graph = Yargi::Digraph.new
         graph.add_marks(GoalModel::DOT_ATTRIBUTES)
-        goal_nodes = {}
+        
+        # Keep goal nodes identified by names
+        # Any attempt to reach a non-existing goal will immediately
+        # create its node. This allows printing graphs for goal models
+        # under construction (missing goal entry for refinement subgoal,
+        # in particular)
+        goal_nodes = Hash.new{|h,k|
+          kind = @model.goalkind(k)
+          h[k] = graph.add_vertex(
+            kind, 
+            kind::DOT_ATTRIBUTES,
+            :label => goalname2label(k)
+          )
+        }
     
         # create all nodes for goals
         @model.each_goal do |goal|
-          goal_name, goal_kind = @model.goalname(goal),
-                                 @model.goalkind(goal)
-                               
-          # create the goal node
-          gn = graph.add_vertex(
-            goal_kind, 
-            goal_kind::DOT_ATTRIBUTES,
-            :label => goalname2label(goal_name)
-          )
-          goal_nodes[goal] = gn
+          goal_nodes[goal]
         end
     
         # create refinements and assignments

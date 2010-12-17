@@ -16,7 +16,7 @@ module Agora
     def self.yaml_file_load(filepath)
       Agora::GoalModel::YAMLBased.parse_file(filepath)
     end
-
+    
     # Marker for goals
     module Goal
     

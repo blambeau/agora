@@ -1,0 +1,40 @@
+About:
+  name: Agora Refinement Pattern Library
+  version: 0.1.0
+  authors:
+    - Bernard Lambeau <bernard.lambeau@uclouvain.be>
+  description: |
+    Library of the Refinement patterns
+Goal Model:
+  Achieve[TargetCondition When CurrentCondition]:
+    definition: |
+      A typical achieve goal
+    formaldef: 
+      G(CurrentCondition -> TargetCondition)
+    refinements:
+      Milestone:
+        pattern: Milestone driven
+        subgoals:
+          - Achieve[MilestoneCondition When CurrentCondition]
+          - Achieve[TargetCondition When MilestoneCondition]
+      Introduce Guard:
+        pattern: Introduce guard
+        subgoals:
+          - Achieve[TargetCondition When CurrentCondition and Guard]
+          - Achieve[Guard When MilestoneCondition]
+          - Maintain[CurrentCondition Until TargetCondition]
+  Achieve[MilestoneCondition When CurrentCondition]:
+    formaldef: 
+      G(CurrentCondition -> F(MilestoneCondition))
+  Achieve[TargetCondition When MilestoneCondition]:
+    formaldef: 
+      G(MilestoneCondition -> F(TargetCondition))
+  Achieve[TargetCondition When CurrentCondition and Guard]:
+    formaldef: 
+      G(CurrentCondition & Guard -> F(TargetCondition))
+  Achieve[Guard When MilestoneCondition]:
+    formaldef:
+      G(MilestoneCondition -> F(Guard))
+  Maintain[CurrentCondition Until TargetCondition]:
+    formaldef:
+      G(CurrentCondition -> CurrentCondition U TargetCondition)

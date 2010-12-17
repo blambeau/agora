@@ -26,6 +26,17 @@ module Agora
       def each_goal(&block)
         @goal_model.keys.each(&block)
       end
+      
+      # Returns goal information for a given goal name
+      def _goalinfo(goalname, default = {})
+        if @goal_model.has_key?(goalname)
+          @goal_model[goalname]
+        elsif default
+          default
+        else
+          raise "No such goal goalname"
+        end
+      end
     
       # Returns the name of a goal
       def goalname(goal)
@@ -34,7 +45,7 @@ module Agora
     
       # Returns the kind of a goal
       def goalkind(goal)
-        g = @goal_model[goal]
+        g = _goalinfo(goal)
         kind = if g["kind"]
           g["kind"]
         elsif goal =~ /^(Maintain|Achieve|Avoid)/
@@ -52,7 +63,7 @@ module Agora
     
       # Yields the block with each goal refinement
       def each_goal_refinement(goal, &block)
-        g = @goal_model[goal]
+        g = _goalinfo(goal)
         refs = (g['refinements'] && g['refinements'].values) ||
                [ g['refinement'] ].compact
         refs.each(&block)
@@ -65,7 +76,7 @@ module Agora
     
       # Yields the block with each goal assignment
       def each_goal_assignment(goal, &block)
-        g = @goal_model[goal]
+        g = _goalinfo(goal)
         asss = (g['assignments'] && g['assignments'].values) ||
                [ g['assignment'] ].compact
         asss.each(&block)
