@@ -112,6 +112,19 @@ module Agora
             raise "Unexpected refinement #{refinement}"
         end
       end
+      
+      # Yields the block with each obstacle resolution in turn
+      def each_obstacle_resolution(obs, &block)
+        obs = _obstacle_info(obs)
+        resolutions = if obs['resolution']
+          [ obs['resolution'] ].flatten
+        elsif obs['resolutions']
+          obs['resolutions']
+        else
+          []
+        end
+        resolutions.each(&block)
+      end
     
       # Returns an enumerable with goal assignments
       def goal_assignments(goal)

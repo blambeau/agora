@@ -82,6 +82,7 @@ module Agora
             graph.connect(faken, goaln, :arrowhead => "veetee")
           end
         end
+
         @model.each_obstacle do |obs|
           obsn = goal_nodes[obs]
           @model.each_refinement(obs) do |ref|
@@ -99,7 +100,21 @@ module Agora
             end
         
           end # refinements
+          
         end # obstacles
+    
+        @model.each_obstacle do |obs|
+          @model.each_obstacle_resolution(obs) do |res|
+            obsn = goal_nodes[obs]
+            resn = goal_nodes[res]
+            faken = graph.add_vertex(
+              GoalModel::Fake,
+              GoalModel::Fake::DOT_ATTRIBUTES,
+            )
+            graph.connect(resn, faken, :arrowhead => "none")
+            graph.connect(faken, obsn, :arrowhead => "veetee")
+          end
+        end
     
         graph
       end
