@@ -1,6 +1,9 @@
+=== 0.1.0 / 2010-12-21
+
+* Added YAML utilities to merge documents
+* Added the ability to reference extra documents in a .ago model
+
 === 0.1.0 / 2010-12-17
 
-* 1 major enhancement
-
-  * Birthday!
+* Birthday!
 
