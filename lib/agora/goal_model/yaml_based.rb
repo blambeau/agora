@@ -19,11 +19,15 @@ module Agora
       # Loads a model from a file, taking care of loading 
       # and merging extra documents 
       def self.load(file, options = {})
+        file = File.expand_path(file)
         options = DEFAULT_OPTIONS.merge(options)
         loaded = Agora::YAMLUtils.file_load(file, {
           :recursive => options[:load_extra_documents]
         }) do |file, loaded, options|
-          loaded['About'] && loaded['About']['documents']
+          docs = loaded['About'] && loaded['About']['documents']
+          (docs || []).collect{|f|
+            File.expand_path(File.join(File.dirname(file), f))
+          }
         end
         YAMLBased.new loaded
       end

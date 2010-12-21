@@ -35,21 +35,17 @@ module Agora
       loaded = YAML::load(File.read(file))
       
       # mark as loaded
-      (options[:loaded] ||= []) << File.expand_path(file)
+      (options[:loaded] ||= []) << file
       return loaded unless options[:recursive]
       
       # recurse on extra documents
       if extras = resolver.call(file, loaded, options)
         extras.each do |extra|
-          
-          # resolve file path
-          resolved = File.join(File.dirname(file), extra)
-          
           # bypass already loaded documents
-          next if options[:loaded].include?(resolved)
+          next if options[:loaded].include?(extra)
           
           # recurse and merge
-          extra_loaded = file_load(resolved, options, &resolver)
+          extra_loaded = file_load(extra, options, &resolver)
           loaded = merge(loaded, extra_loaded)
         end
       end

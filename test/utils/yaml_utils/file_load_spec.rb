@@ -10,7 +10,10 @@ module Agora
         expected = File.expand_path('../fixtures/merged.yaml', __FILE__)
         
         merged = file_load(left, {:recursive => true}) do |f,loaded,opts|
-          loaded["About"]["documents"]
+          docs = loaded["About"]["documents"] || []
+          docs.collect{|extra|
+            File.expand_path(File.join(File.dirname(f), extra))
+          }
         end
         merged.should == YAML::load(File.read(expected))
       end
