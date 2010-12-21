@@ -16,20 +16,16 @@ module Agora
         @goal_model  = @yaml_loaded["Goal Model"]  || {}
       end
     
-      # Parses some YAML text and returns a model 
-      # instance
-      def self.parse(yaml_text)
-        YAMLBased.new YAML::load(yaml_text)
-      end
-    
-      # Parses a YAML file and returns a model instance
-      def self.parse_file(filepath)
-        parse(File.read(filepath))
-      end
-      
-      # Loads a model from a file
+      # Loads a model from a file, taking care of loading 
+      # and merging extra documents 
       def self.load(file, options = {})
         options = DEFAULT_OPTIONS.merge(options)
+        loaded = Agora::YAMLUtils.file_load(file, {
+          :recursive => options[:load_extra_documents]
+        }) do |file, loaded, options|
+          loaded['About'] && loaded['About']['documents']
+        end
+        YAMLBased.new loaded
       end
     
       # Returns goal information for a given goal name

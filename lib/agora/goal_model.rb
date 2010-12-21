@@ -7,14 +7,9 @@ module Agora
       # :nodesep => 0.2
     }
     
-    # Loads a goal model from a YAML text
-    def self.yaml_load(text)
-      Agora::GoalModel::YAMLBased.parse(text)
-    end
-    
     # Loads a goal model from a YAML file
     def self.yaml_file_load(filepath)
-      Agora::GoalModel::YAMLBased.parse_file(filepath)
+      Agora::GoalModel::YAMLBased.load(filepath)
     end
     
     # Marker for goals
