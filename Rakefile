@@ -9,7 +9,7 @@ desc "Build all examples at once"
 task :"build-examples" do
   Dir[File.join($here, '**/*.ago')].each do |ado|
     gif_file = File.join(File.dirname(ado), File.basename(ado, ".ago") + ".gif")
-    cmd = "./bin/agora #{ado} | dot -Tgif -o #{gif_file}"
+    cmd = "./bin/agora \"#{ado}\" | dot -Tgif -o \"#{gif_file}\""
     puts `#{cmd}`
   end
 end
