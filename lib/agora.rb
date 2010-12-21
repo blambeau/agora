@@ -12,3 +12,4 @@ module Agora
 
 end # module Agora
 require "agora/goal_model"
+require "agora/utils"

@@ -4,6 +4,10 @@ module Agora
     # Provides goal model navigation API on YAML files
     class YAMLBased
     
+      DEFAULT_OPTIONS = {
+        :load_extra_documents => true
+      }
+    
       # Creates a decoded with brut YAML loaded
       # object
       def initialize(yaml_loaded)
@@ -21,6 +25,11 @@ module Agora
       # Parses a YAML file and returns a model instance
       def self.parse_file(filepath)
         parse(File.read(filepath))
+      end
+      
+      # Loads a model from a file
+      def self.load(file, options = {})
+        options = DEFAULT_OPTIONS.merge(options)
       end
     
       # Returns goal information for a given goal name

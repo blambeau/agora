@@ -76,7 +76,7 @@ module Agora
             goaln = goal_nodes[og]
             faken = graph.add_vertex(
               GoalModel::Fake,
-              GoalModel::Fake::DOT_ATTRIBUTES,
+              GoalModel::Fake::DOT_ATTRIBUTES
             )
             graph.connect(obsn, faken, :arrowhead => "none")
             graph.connect(faken, goaln, :arrowhead => "veetee")
@@ -109,7 +109,7 @@ module Agora
             resn = goal_nodes[res]
             faken = graph.add_vertex(
               GoalModel::Fake,
-              GoalModel::Fake::DOT_ATTRIBUTES,
+              GoalModel::Fake::DOT_ATTRIBUTES
             )
             graph.connect(resn, faken, :arrowhead => "none")
             graph.connect(faken, obsn, :arrowhead => "veetee")

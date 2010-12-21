@@ -1,0 +1,14 @@
+About:
+  authors:
+    - Bernard Lambeau <blambeau@gmail.com>
+  documents:
+    - commons.yaml
+First Section:
+  Commons:
+    - right.yaml
+  Identified Array:
+    - third entry
+  Identified Hash:
+    right only: right
+    shared array:
+      - right.yaml
