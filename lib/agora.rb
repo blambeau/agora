@@ -5,6 +5,7 @@ rescue LoadError
   gem 'yargi', '>= 0.1.1'
   require 'yargi'
 end
+require 'pathname'
 
 module Agora
 
@@ -12,4 +13,5 @@ module Agora
 
 end # module Agora
 require "agora/goal_model"
+require "agora/config"
 require "agora/utils"
