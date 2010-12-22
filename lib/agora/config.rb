@@ -10,17 +10,25 @@ module Agora
       @root_folder = Pathname.new(root_folder)
     end
     
-    # Finds and build a Config instance by locating
-    # .agora in one of root's self-or-ancestors
-    def self.find(root = '.')
-      root = Pathname.new(root).expand_path unless root.is_a?(Pathname)
-      if (root + ".agora").file?
-        return Config.new(root)
+    # Finds current folder or one of its ancestors
+    # that contains a .agora file. Returns a Pathname
+    # instance
+    def self.find_folder(root = '.')
+      if !root.is_a?(Pathname)
+        find_folder(Pathname.new(root).expand_path)
+      elsif (root + ".agora").file?
+        root
       elsif (root.parent.exist? and root.parent != root)
-        find(root.parent)
+        find_folder(root.parent)
       else
         raise "Unable to find a .agora file from #{root}"
       end
+    end
+    
+    # Finds and build a Config instance by locating
+    # .agora in one of root's self-or-ancestors
+    def self.find(root = '.')
+      Config.new(find_folder(root))
     end
     
   end # class Config
