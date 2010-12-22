@@ -25,10 +25,19 @@ module Agora
       end
     end
     
-    # Finds and build a Config instance by locating
-    # .agora in one of root's self-or-ancestors
+    # Loads a configuration instance from a root folder.
+    # root_folder must be a Pathname instance and be such
+    # that a .agora file exists
+    def self.load(root_folder = find_folder)
+      dot_agora = (root_folder + '.agora')
+      cfg = Config.new(root_folder)
+      cfg.instance_eval(dot_agora.read, dot_agora.to_s)
+      cfg
+    end
+    
+    # Convenient helper for load(find_folder(root))
     def self.find(root = '.')
-      Config.new(find_folder(root))
+      Config.load(find_folder(root))
     end
     
   end # class Config

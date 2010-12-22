@@ -1,8 +1,5 @@
 require File.expand_path('../../spec_helper', __FILE__)
 module Agora
-  
-  FIXTURES_PATHNAME = Pathname.new('../../fixtures').expand_path(__FILE__)
-  
   describe "Config#find" do
     
     it "should correctly work on a folder with a .agora file" do
@@ -21,5 +18,5 @@ module Agora
       }.should raise_error
     end
     
-  end 
+  end # Config#find
 end # module Agora

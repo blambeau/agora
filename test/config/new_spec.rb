@@ -10,5 +10,5 @@ module Agora
       lambda{ Config.new(Pathname.new('.')) }.should_not raise_error
     end
     
-  end 
+  end # Config#initialize
 end # module Agora
