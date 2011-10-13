@@ -4,9 +4,13 @@
 
 ## Description
 
-Agora (Agile Goal-Oriented Requirement Acquisition) aims at helping KAOS adopters (Keep All Objectives Satisfied) by providing agile tools around aquisition of requirement models, and goal models in particular. It provides pragmatic tools to write such models, present them, analyze them, and so on.
+Agora (Agile Goal-Oriented Requirement Acquisition) aims at helping KAOS adopters 
+(Keep All Objectives Satisfied) by providing agile tools around aquisition of 
+requirement models, and goal models in particular. It provides pragmatic tools 
+to write such models, present them, analyze them, and so on.
 
-Where to start? Try the command below. Have a look at the generated image, as well as the minepump.ago file. Enjoy!
+Where to start? Try the command below. Have a look at the generated image, as 
+well as the minepump.ago file. Enjoy!
 
     ./bin/agora examples/minepump.ago | dot -Tgif -o examples/minepump.gif
 
