@@ -1,19 +1,11 @@
-begin
-  require 'yargi'
-rescue LoadError
-  require 'rubygems'
-  gem 'yargi', '>= 0.1.1'
-  require 'yargi'
-end
+require 'agora/version'
+require 'agora/loader'
 require 'pathname'
-
 #
 # Agile Goal-Oriented Requirement Acquisition
 #
 module Agora
 
-  VERSION = '0.1.1'
-  
   # Loads Agora in a given location
   def self.load(root = ".")
     config = Config.find(root)

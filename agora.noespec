@@ -1,0 +1,29 @@
+# Noe template for ruby gem libraries (https://github.com/blambeau/noe) - short version
+# Run 'noe show-spec' and 'noe help show-spec' for additional details.
+template-info:
+  name: "ruby"
+  version: 1.5.1
+variables:
+  lower: 
+    agora
+  upper:
+    Agora
+  version:
+    0.1.1
+  summary: |-
+    Agile Goal Oriented Requirement Aquisition
+  description: |-
+    Agora (Agile Goal-Oriented Requirement Acquisition) aims at helping KAOS 
+    adopters (Keep All Objectives Satisfied) by providing agile tools around 
+    aquisition of requirement models, and goal models in particular. It provides 
+    pragmatic tools to write such models, present them, analyze them, and so on.
+  authors: 
+    - {name: Bernard Lambeau, email: blambeau@gmail.com}
+  links:
+    - http://github.com/blambeau/agora
+  dependencies: 
+    - {name: rake,         version: "~> 0.9.2",  groups: [test, release]}
+    - {name: rspec,        version: "~> 2.6.0",  groups: [test, release]}
+    - {name: wlang,        version: "~> 0.10.2", groups: [release      ]}
+    - {name: yargi,        version: "~> 0.1.2",  groups: [runtime      ]}
+
