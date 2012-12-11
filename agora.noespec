@@ -1,8 +1,8 @@
 # Noe template for ruby gem libraries (https://github.com/blambeau/noe) - short version
 # Run 'noe show-spec' and 'noe help show-spec' for additional details.
 template-info:
-  name: "ruby"
-  version: 1.5.1
+  name: "rubygem.noe"
+  version: 2.0.0
 variables:
   lower: 
     agora
