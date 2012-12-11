@@ -5,17 +5,15 @@ module Agora
       include YAMLUtils
     
       it "should merge as expected" do
-        left  = File.expand_path('../fixtures/left.yaml', __FILE__)
-        right = File.expand_path('../fixtures/right.yaml', __FILE__)
-        expected = File.expand_path('../fixtures/merged.yaml', __FILE__)
+        left  = Path.dir/'fixtures/left.yaml'
+        right = Path.dir/'fixtures/right.yaml'
+        expected = Path.dir/'fixtures/merged.yaml'
         
         merged = file_load(left, {:recursive => true}) do |f,loaded,opts|
           docs = loaded["About"]["documents"] || []
-          docs.collect{|extra|
-            File.expand_path(File.join(File.dirname(f), extra))
-          }
+          docs.map{|extra| f.dir/extra }
         end
-        merged.should == YAML::load(File.read(expected))
+        merged.should == YAML::load(expected.read)
       end
     
     end # describe "merge"

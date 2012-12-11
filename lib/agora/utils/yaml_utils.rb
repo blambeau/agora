@@ -6,22 +6,13 @@ module Agora
     # result.
     # 
     def merge(left, right)
-      unless left.class == right.class
-        raise "Unexpected case #{left.class} vs. #{right.class}"
-      end
+      raise "Unexpected case #{left.class} vs. #{right.class}" unless left.class==right.class
       case left
-        when Array
-          (left + right).uniq
-        when Hash
-          left.merge(right){|key,leftv,rightv|
-            merge(leftv,rightv)
-          }
-        else
-          if left==right
-            left
-          else
-            raise "Conflict on #{left} and #{right}"
-          end
+      when Array then (left + right).uniq
+      when Hash  then left.merge(right){|_,lv,rv| merge(lv,rv) }
+      else
+        raise "Conflict on #{left} and #{right}" unless left==right
+        left
       end
     end
     
@@ -31,8 +22,8 @@ module Agora
     # to true
     #
     def file_load(file, options = {}, &resolver)
-      # load YAML brut result
-      loaded = YAML::load(File.read(file))
+      file   = Path(file).expand
+      loaded = YAML.load file.read
       
       # mark as loaded
       (options[:loaded] ||= []) << file
