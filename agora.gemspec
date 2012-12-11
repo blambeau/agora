@@ -127,6 +127,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency("rspec", "~> 2.6.0")
   s.add_development_dependency("wlang", "~> 0.10.2")
   s.add_dependency("yargi", "~> 0.1.2")
+  s.add_dependency("path", "~> 1.3.1")
 
   # The version of ruby required by this gem
   #

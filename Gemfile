@@ -13,4 +13,5 @@ end
 
 group :runtime do
   gem "yargi", "~> 0.1.2"
+  gem "path", "~> 1.3.1"
 end
