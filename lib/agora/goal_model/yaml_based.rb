@@ -15,6 +15,7 @@ module Agora
         @agent_model = @yaml_loaded["Agent Model"] || {}
         @goal_model  = @yaml_loaded["Goal Model"]  || {}
       end
+      attr_reader :yaml_loaded
     
       # Loads a model from a file, taking care of loading 
       # and merging extra documents 
@@ -24,7 +25,7 @@ module Agora
         loaded = Agora::YAMLUtils.file_load(file, {
           :recursive => options[:load_extra_documents]
         }) do |file, loaded, options|
-          docs = loaded['About'] && loaded['About']['documents']
+          docs = loaded['about'] && loaded['about']['documents']
           (docs || []).collect{|f|
             File.expand_path(File.join(File.dirname(file), f))
           }
