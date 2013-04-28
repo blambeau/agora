@@ -7,9 +7,13 @@ module Helpers
     Path.dir/"fixtures"
   end
 
+  def examples
+    Path.backfind("examples").glob("*.json")
+  end
+
+  extend(self)
 end
 
 RSpec.configure do |c|
   c.include Helpers
 end
-
