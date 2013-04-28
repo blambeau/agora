@@ -1,0 +1,19 @@
+# List of agents
+*{agents}{
+  declare agent
+    id "+{id}"
+    name "+{name}"
+    description "+{description}"
+  end
+}
+
+# List of goals
+*{goals}{
+  declare goal
+    id "+{id}"
+    name "+{name}"
+    definition "+{definition}"
+    #{assignments}{assignedto}{${id}}
+    #{refinements}{refinedby}{${id}}
+  end
+}

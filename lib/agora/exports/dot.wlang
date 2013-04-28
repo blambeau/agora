@@ -1,0 +1,9 @@
+digraph GM {
+rankdir = BT;
+*{nodes}{
+  ${id} [label = "+{label}"];
+}
+*{edges}{
+  ${from} -> ${to} [label = "+{label}"];
+}
+}

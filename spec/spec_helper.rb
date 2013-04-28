@@ -7,8 +7,16 @@ module Helpers
     Path.dir/"fixtures"
   end
 
+  def examples_folder
+    Path.backfind("agora/examples")
+  end
+
   def examples
-    Path.backfind("examples").glob("*.json")
+    examples_folder.glob("*.json")
+  end
+
+  def minepump_model
+    Agora::Model.load(examples_folder/"minepump.json")
   end
 
   extend(self)
