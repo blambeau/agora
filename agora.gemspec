@@ -123,11 +123,12 @@ Gem::Specification.new do |s|
   # One call to add_development_dependency('gem_name', 'gem version requirement')
   # for each development dependency. These gems are required for developers
   #
-  s.add_development_dependency("rake", "~> 0.9.2")
-  s.add_development_dependency("rspec", "~> 2.6.0")
-  s.add_development_dependency("wlang", "~> 0.10.2")
+  s.add_development_dependency("rake", "~> 10.0")
+  s.add_development_dependency("rspec", "~> 2.13")
   s.add_dependency("yargi", "~> 0.1.2")
   s.add_dependency("path", "~> 1.3.1")
+  s.add_dependency("alf", "~> 0.13.0")
+  s.add_dependency("wlang", "~> 2.0")
 
   # The version of ruby required by this gem
   #
