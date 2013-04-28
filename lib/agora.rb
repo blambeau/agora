@@ -7,3 +7,4 @@ require_relative 'agora/ext'
 module Agora
 
 end # module Agora
+require_relative 'agora/support'
