@@ -3,15 +3,7 @@ begin
   require "agora"
 rescue LoadError => ex
   $LOAD_PATH.unshift(File.expand_path("../../lib", __FILE__))
+  require "bundler/setup"
   require "agora"
 end
-
-unless ARGV.size == 1
-  puts "Usage: agora MODEL.ago"
-else
-  file  = ARGV[0]
-  model = Agora::GoalModel.yaml_file_load(file)
-  graph = Agora::GoalModel::DotGraphOutputter.new(model).run
-  puts graph.to_dot
-end
-
+Agora::Command.run(ARGV)

@@ -10,7 +10,8 @@ module Agora
             + refinements[from: :child, to: :id,     label: ""] \
             + assignments[from: :id,    to: :goal,   label: :sysref] \
             + assignments[from: ->{ "#{id}_ag" }, to: :id, label: ""]
-      WLang::Dot.render(Path.dir/"dot.wlang", nodes: nodes, edges: edges)
+      context = {nodes: nodes, edges: edges}
+      WLang::Dot.render(Path.dir/"dot.wlang", context, buf)
     end
 
   end # class Model
