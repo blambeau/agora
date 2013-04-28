@@ -40,3 +40,4 @@ module Agora
 
   end # class Model
 end # module Agora
+require_relative 'model/focus'
