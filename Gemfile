@@ -11,9 +11,9 @@ group :release do
 end
 
 group :runtime do
-  gem "yargi", "~> 0.1.2"
+  gem "quickl", "~> 0.4.3"
   gem "path", "~> 1.3.1"
-  gem "wlang", "~> 2.0"
-  #gem "alf", "~> 0.13.0"
+  #gem "alf-core", "~> 0.13.0"
   gem "alf-core", path: "../alf-tool/alf-core"
+  gem "wlang", "~> 2.0"
 end
