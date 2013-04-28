@@ -1,0 +1,8 @@
+{
+  "agents": [
+    { "id":   "sensor",
+      "name": "Sensor",
+      "description": "The sensor agent",
+      "type": "environment" }
+  ]
+}

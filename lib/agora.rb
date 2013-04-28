@@ -8,3 +8,4 @@ module Agora
 
 end # module Agora
 require_relative 'agora/support'
+require_relative 'agora/model'
