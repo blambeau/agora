@@ -27,4 +27,5 @@ variables:
     - {name: quickl,       version: "~> 0.4.3",   groups: [runtime      ]}
     - {name: path,         version: "~> 1.3.1",   groups: [runtime      ]}
     - {name: alf-core,     version: "~> 0.13.0",  groups: [runtime      ]}
-    - {name: wlang,        version: "~> 2.0",     groups: [runtime      ]}
+    - {name: wlang,        version: "~> 2.2",     groups: [runtime      ]}
+    - {name: redcarpet,    version: "~> 2.0",     groups: [runtime      ]}

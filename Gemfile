@@ -15,5 +15,6 @@ group :runtime do
   gem "path", "~> 1.3.1"
   #gem "alf-core", "~> 0.13.0"
   gem "alf-core", path: "../alf-tool/alf-core"
-  gem "wlang", "~> 2.0"
+  gem "wlang", "~> 2.2"
+  gem "redcarpet", "~> 2.0"
 end

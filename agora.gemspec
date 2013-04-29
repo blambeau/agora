@@ -128,7 +128,8 @@ Gem::Specification.new do |s|
   s.add_dependency("quickl", "~> 0.4.3")
   s.add_dependency("path", "~> 1.3.1")
   s.add_dependency("alf-core", "~> 0.13.0")
-  s.add_dependency("wlang", "~> 2.0")
+  s.add_dependency("wlang", "~> 2.2")
+  s.add_dependency("redcarpet", "~> 2.0")
 
   # The version of ruby required by this gem
   #
