@@ -15,6 +15,12 @@ module Agora
       definition: String
     ]
 
+    attribute :obstacles, Relation[
+      id: String,
+      name: String,
+      definition: String
+    ]
+
     attribute :refinements, Relation[
       id: String, 
       parent: String, 
@@ -27,6 +33,13 @@ module Agora
       goal: String,
       agent: String,
       sysref: String
+    ]
+
+    attribute :predicates, Relation[
+      id: String,
+      name: String,
+      signature: String,
+      definition: String
     ]
 
     attribute :insystem, Relation[
