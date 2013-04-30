@@ -14,6 +14,18 @@ module Agora
       foo.age.should eq(17)
     end
 
+    it 'provides setters as well as getters' do
+      foo = Foo.new(age: "17")
+      foo.age = 18
+      foo.age.should eq(18)
+    end
+
+    it 'adds coercion on setters' do
+      foo = Foo.new(age: "17")
+      foo.age = "18"
+      foo.age.should eq(18)
+    end
+
     it 'ignores extra' do
       lambda{
         Foo.new(age: "17", notsupported: "bla")

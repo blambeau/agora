@@ -9,12 +9,7 @@ module Agora
       self.class.attributes.each_pair do |attrname,attrtype|
         value = h[attrname] || h[attrname.to_s]
         value = Relation::DUM if value.nil? and attrtype <= Alf::Relation
-        value = if attrtype.respond_to?(:coerce)
-                  attrtype.coerce(value)
-                else
-                  Alf::Support.coerce(value, attrtype)
-                end
-        instance_variable_set("@#{attrname}", value)
+        self.send("#{attrname}=", value)
       end
     end
 
@@ -48,7 +43,17 @@ module Agora
 
       def attribute(name, type)
         attributes[name] = type
-        define_method(name){ instance_variable_get("@#{name}") }
+        define_method(name){
+          instance_variable_get("@#{name}")
+        }
+        define_method("#{name}="){|value|
+          value = if type.respond_to?(:coerce)
+                    type.coerce(value)
+                  else
+                    Alf::Support.coerce(value, type)
+                  end
+          instance_variable_set("@#{name}", value)
+        }
       end
     end
 
