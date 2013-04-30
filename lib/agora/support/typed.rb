@@ -13,6 +13,14 @@ module Agora
       end
     end
 
+    def dup
+      if block_given?
+        super.tap(&Proc.new)
+      else
+        super
+      end
+    end
+
     def to_hash
       self.class.attributes.keys.each_with_object({}){|k,h|
         h[k] = instance_variable_get("@#{k}")

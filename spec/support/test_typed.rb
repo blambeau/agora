@@ -37,5 +37,14 @@ module Agora
       foo.hobbies.should eq(Relation::DUM)
     end
 
+    it 'provides a dup helper' do
+      foo  = Foo.new(age: "17")
+      foo2 = foo.dup
+      foo3 = foo.dup{|f| f.age = 18 }
+      foo.age.should eq(17)
+      foo2.age.should eq(17)
+      foo3.age.should eq(18)
+    end
+
   end
 end
