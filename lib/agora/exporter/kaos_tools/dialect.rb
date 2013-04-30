@@ -1,5 +1,5 @@
 module Agora
-  module Exports
+  module Exporter
     class KaosTools
       class Dialect < WLang::Html
 
@@ -32,5 +32,5 @@ module Agora
 
       end # class Dialect
     end # module KaosTools
-  end # module Exports
+  end # module Exporter
 end # module Agora

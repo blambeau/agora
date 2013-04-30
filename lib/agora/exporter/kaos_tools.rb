@@ -1,16 +1,7 @@
 module Agora
-  module Exports
+  module Exporter
     class KaosTools
-
-      def initialize(model, buf)
-        @model  = model
-        @buf    = buf
-      end
-      attr_reader :model, :buf
-
-      def self.call(model, buf)
-        new(model, buf).call
-      end
+      include Exporter
 
       def agents
         model.agents
@@ -44,11 +35,11 @@ module Agora
       end
 
     end # class KaosTools
-  end # module Exports
+  end # module Exporter
   class Model
 
     def to_kaos(buf = "")
-      Exports::KaosTools.call(self, buf)
+      Exporter::KaosTools.call(self, buf)
     end
 
   end # class Model
