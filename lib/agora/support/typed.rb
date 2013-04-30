@@ -6,10 +6,15 @@ module Agora
     end
 
     def initialize(h)
-      h.each_pair do |k,v|
-        next unless type = self.class.attributes[k.to_sym]
-        value = type.respond_to?(:coerce) ? type.coerce(v) : Alf::Support.coerce(v, type)
-        instance_variable_set("@#{k}", value)
+      self.class.attributes.each_pair do |attrname,attrtype|
+        value = h[attrname] || h[attrname.to_s]
+        value = Relation::DUM if value.nil? and attrtype <= Alf::Relation
+        value = if attrtype.respond_to?(:coerce)
+                  attrtype.coerce(value)
+                else
+                  Alf::Support.coerce(value, attrtype)
+                end
+        instance_variable_set("@#{attrname}", value)
       end
     end
 
