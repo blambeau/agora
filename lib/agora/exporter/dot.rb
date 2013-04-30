@@ -3,17 +3,30 @@ module Agora
     class Dot
       include Exporter
 
+      NodeAttributes = Alf::Relation.coerce(Path.dir/"dot/node_attributes.rash")
+      EdgeAttributes = Alf::Relation.coerce(Path.dir/"dot/edge_attributes.rash")
+
+      def nodes
+        nodes = model.goals[:id, label: :name, kind: "goal"] \
+              + model.refinements[:id, label: "", kind: "refinement"] \
+              + model.assignments[:id, label: "", kind: "assignment"] \
+              + (model.assignments[:id] *
+                 model.agents[agent: :id, label: :name])[:label, id: ->{ "#{id}_ag" }, kind: "agent"]
+        nodes = (nodes * NodeAttributes).wrap([:id, :kind], :attributes, allbut: true)
+        nodes
+      end
+
+      def edges
+        edges = model.refinements[from: :id,              to: :parent, label: :sysref, kind: "refinement"] \
+              + model.refinements[from: :child,           to: :id,     label: "",      kind: "none"] \
+              + model.assignments[from: :id,              to: :goal,   label: :sysref, kind: "assignment"] \
+              + model.assignments[from: ->{ "#{id}_ag" }, to: :id,     label: "",      kind: "none"]
+        edges = (edges * EdgeAttributes).wrap([:from, :to, :kind], :attributes, allbut: true)
+        edges
+      end
+
       def call
-        nodes = model.goals[:id, label: :name] \
-              + model.refinements[:id, label: ""] \
-              + model.assignments[:id, label: ""] \
-              + (model.assignments[:id] * model.agents[agent: :id, label: :name])[:label, id: ->{ "#{id}_ag" }]
-        edges = model.refinements[from: :id,    to: :parent, label: :sysref] \
-              + model.refinements[from: :child, to: :id,     label: ""] \
-              + model.assignments[from: :id,    to: :goal,   label: :sysref] \
-              + model.assignments[from: ->{ "#{id}_ag" }, to: :id, label: ""]
-        context = {nodes: nodes, edges: edges}
-        WLang::Dot.render(Path.dir/"dot/goal-diagram.wlang", context, buf)
+        Dialect.render(Path.dir/"dot/goal-diagram.wlang", self, buf)
       end
 
     end
@@ -26,3 +39,4 @@ module Agora
 
   end # class Model
 end # module Agora
+require_relative "dot/dialect"

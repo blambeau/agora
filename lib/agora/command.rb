@@ -23,7 +23,7 @@ module Agora
         raise Quickl::Exit, "#{Quickl.program_name} #{Agora::VERSION} (c) 2013, Bernard Lambeau"
       end
     end
-  
+
     # Execute the command on some arguments
     def execute(args)
       if args.size == 1

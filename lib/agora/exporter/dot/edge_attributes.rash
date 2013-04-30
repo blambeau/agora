@@ -1,0 +1,3 @@
+{ kind: "refinement", arrowhead: "normal" }
+{ kind: "assignment", arrowhead: "normal" }
+{ kind: "none",       arrowhead: "none"   }

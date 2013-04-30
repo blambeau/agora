@@ -1,9 +1,12 @@
 digraph GM {
-rankdir = BT;
-*{nodes}{
-  ${id} [label = "+{label}"];
-}
-*{edges}{
-  ${from} -> ${to} [label = "+{label}"];
-}
+  rankdir = BT;
+  ranksep = 0.2;
+
+  *{nodes}{
+    ${id} [${attributes}];
+  }
+
+  *{edges}{
+    ${from} -> ${to} [${attributes}];
+  }
 }
