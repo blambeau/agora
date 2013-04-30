@@ -3,15 +3,27 @@ module Agora
     include Typed
 
     attribute :agents, Relation[
-      id:   String, 
-      name: String, 
-      description: String, 
+      id:   String,
+      name: String,
+      description: String,
       type: String
     ]
 
     attribute :goals, Relation[
-      id: String, 
-      name: String, 
+      id: String,
+      name: String,
+      definition: String
+    ]
+
+    attribute :domain_properties, Relation[
+      id: String,
+      name: String,
+      definition: String
+    ]
+
+    attribute :domain_hypotheses, Relation[
+      id: String,
+      name: String,
       definition: String
     ]
 
@@ -22,10 +34,15 @@ module Agora
     ]
 
     attribute :refinements, Relation[
-      id: String, 
-      parent: String, 
-      child: String, 
+      id: String,
+      parent: String,
+      child: String,
       sysref: String
+    ]
+
+    attribute :resolutions, Relation[
+      obstacle: String,
+      goal: String
     ]
 
     attribute :assignments, Relation[
