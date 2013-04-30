@@ -64,6 +64,12 @@ module Agora
       system: String
     ]
 
+    def selection
+      self.dup do |s|
+        yield(self, s)
+      end
+    end
+
     def self.load(file)
       new Path(file).load
     end
