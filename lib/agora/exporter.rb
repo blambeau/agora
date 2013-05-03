@@ -18,3 +18,4 @@ end # module Agora
 require_relative 'exporter/kaos_tools'
 require_relative 'exporter/dot'
 require_relative 'exporter/web_report'
+require_relative 'exporter/json'
