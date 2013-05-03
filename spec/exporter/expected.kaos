@@ -18,13 +18,24 @@ declare goal
   id detected
   name "Achieve [LevelDetected When High]"
   assignedto sensor
+  obstructedby not_detected
 end
 declare goal
-  id 62bf66c9-123e-40a6-95c2-fad93d8237a1
+  id evacuate_mine
+  name "Achieve [Mine Evacuated when Level Not Detected]"
+end
+declare goal
+  id e065b78d-ec62-4044-9bbc-8ecb1a2fef8a
   name "Achieve [PumpOn When HighWater]"
   refinedby detected, on_when_detected, water_is_slow
 end
 declare goal
   id on_when_detected
   name "Achieve [PumpOn When LevelDetected]"
+end
+# List of obstacles
+declare obstacle
+  id not_detected
+  name "Level Never Detected"
+  resolvedby evacuate_mine
 end

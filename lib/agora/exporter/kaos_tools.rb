@@ -27,7 +27,7 @@ module Agora
       ### GOAL declarations
 
       def goal_declarations
-        model.goals * refinedby * assignedto
+        model.goals * refinedby * assignedto * obstructedby
       end
 
       # Relation[id: String, refinedby: Relation[child: String]]
@@ -41,6 +41,23 @@ module Agora
       def assignedto
         assign = model.assignments[id: :goal, child: :agent]
         structure(assign, :assignedto)
+      end
+
+      # Relation[id: String, obstructedby: Relation[child: String]]
+      def obstructedby
+        obstructions = model.obstructions[id: :goal, child: :obstacle]
+        structure(obstructions, :obstructedby)
+      end
+
+      ### OBSTACLE declarations
+
+      def obstacle_declarations
+        model.obstacles * resolvedby
+      end
+
+      def resolvedby
+        resolutions = model.resolutions[id: :obstacle, child: :goal]
+        structure(resolutions, :resolvedby)
       end
 
     private

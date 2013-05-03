@@ -23,9 +23,21 @@ declare goal
   id detected
   name "Achieve [LevelDetected When High]"
   assignedto sensor
+  obstructedby not_detected
 end
 
 declare goal
   id on_when_detected
   name "Achieve [PumpOn When LevelDetected]"
+end
+
+declare obstacle
+  id not_detected
+  name "Level Never Detected"
+  resolvedby evacuate_mine
+end
+
+declare goal
+  id evacuate_mine
+  name "Achieve [Mine Evacuated when Level Not Detected]"
 end

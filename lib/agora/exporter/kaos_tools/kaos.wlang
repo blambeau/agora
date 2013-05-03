@@ -32,5 +32,16 @@
     "{definition}
     **{refinedby}
     **{assignedto}
+    **{obstructedby}
+  end
+}
+
+# List of obstacles
+*{obstacle_declarations}{
+  declare obstacle
+    id +{id}
+    "{name}
+    "{definition}
+    **{resolvedby}
   end
 }
