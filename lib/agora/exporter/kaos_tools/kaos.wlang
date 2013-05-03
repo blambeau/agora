@@ -1,5 +1,5 @@
 # List of agents
-*{agents}{
+*{agent_declarations}{
   declare agent
     id +{id}
     name "{name}
@@ -8,7 +8,7 @@
 }
 
 # List of goals
-*{goals}{
+*{goal_declarations}{
   declare goal
     id +{id}
     name "{name}
