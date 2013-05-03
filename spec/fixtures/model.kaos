@@ -4,9 +4,19 @@ declare agent
   description "The sensor agent"
 end
 
+declare domhyp
+  id water_is_slow
+  name "Water Level changes Slowly"
+end
+
+declare domprop
+  id water_is_wet
+  name "Water is wet"
+end
+
 declare goal
   name "Achieve [PumpOn When HighWater]"
-  refinedby detected, on_when_detected
+  refinedby detected, on_when_detected, water_is_slow
 end
 
 declare goal

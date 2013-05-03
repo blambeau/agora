@@ -7,6 +7,23 @@
   end
 }
 
+# List of domain descriptions (properties and hypotheses)
+*{domprop_declarations}{
+  declare domprop
+    id +{id}
+    name "{name}
+    definition "{definition}
+  end
+}
+
+*{domhyp_declarations}{
+  declare domhyp
+    id +{id}
+    name "{name}
+    definition "{definition}
+  end
+}
+
 # List of goals
 *{goal_declarations}{
   declare goal

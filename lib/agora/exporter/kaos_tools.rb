@@ -13,6 +13,16 @@ module Agora
         model.agents
       end
 
+      ### DOMAIN descriptions
+
+      def domprop_declarations
+        model.domain_properties
+      end
+
+      def domhyp_declarations
+        model.domain_hypotheses
+      end
+
       ### GOAL declarations
 
       def goal_declarations
