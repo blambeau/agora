@@ -15,6 +15,7 @@ declare domprop
 end
 
 declare goal
+  id pumpon_when_highwater
   name "Achieve [PumpOn When HighWater]"
   refinedby detected, on_when_detected, water_is_slow
 end
@@ -47,7 +48,19 @@ declare obstacle
   id not_detected
   name "Level Never Detected"
   resolvedby evacuate_mine
+  refinedby not_detected_sensor_broken
+  refinedby not_detected_sensor_not_calibrated
 end
+
+  declare obstacle
+    id not_detected_sensor_broken
+    name "Level Never Detected Because Sensor Broken"
+  end
+
+  declare obstacle
+    id not_detected_sensor_not_calibrated
+    name "Level Never Detected Because Sensor Not Calibrated"
+  end
 
 declare goal
   id evacuate_mine

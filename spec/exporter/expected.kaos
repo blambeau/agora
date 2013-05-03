@@ -33,7 +33,7 @@ declare goal
   name "Achieve [Pump Manually Set On When Level Detected]"
 end
 declare goal
-  id c6cb8239-4ed7-46a4-b0cf-626f9a81abd6
+  id pumpon_when_highwater
   name "Achieve [PumpOn When HighWater]"
   refinedby detected, on_when_detected, water_is_slow
 end
@@ -48,4 +48,12 @@ declare obstacle
   id not_detected
   name "Level Never Detected"
   resolvedby evacuate_mine
+end
+declare obstacle
+  id not_detected_sensor_broken
+  name "Level Never Detected Because Sensor Broken"
+end
+declare obstacle
+  id not_detected_sensor_not_calibrated
+  name "Level Never Detected Because Sensor Not Calibrated"
 end
