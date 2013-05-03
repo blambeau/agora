@@ -23,7 +23,7 @@ module Agora
             sysref   = tuple[:sysref]
             sysref   = sysref ? "[#{sysref}] " : " "
             children = tuple[:children].map{|t| t[:child]}
-            buf << name << sysref << children.join(", ")
+            buf << name << sysref << children.join(", ") << "\n"
           end
         end
 
