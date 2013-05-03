@@ -13,6 +13,9 @@ module Agora
         subject.agents.size.should eq(1)
       end
 
+      it 'has expected refinements' do
+        subject.refinements.should be_a(Relation)
+      end
     end
 
     subject{ Model.load(file) }

@@ -5,7 +5,7 @@ module Agora
       unless exporter = ENV['KAOSTOOLS_RELATIONAL_EXPORTER']
         raise "Unable to use KAOSTools, please set KAOSTOOLS_RELATIONAL_EXPORTER"
       end
-      JSON.load `mono #{exporter} #{file}`
+      ::JSON.load `mono #{exporter} #{file}`
     end
 
     def self.load(path)
