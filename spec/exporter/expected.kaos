@@ -1,21 +1,31 @@
+# List of agents
 declare agent
   id sensor
   name "Sensor"
   description "The sensor agent"
 end
 
-declare goal
-  name "Achieve [PumpOn When HighWater]"
-  refinedby detected, on_when_detected
-end
-
+# List of goals
 declare goal
   id detected
   name "Achieve [LevelDetected When High]"
+  definition ""
+  
   assignedto sensor
-end
 
+end
+declare goal
+  id 0785e640-05bf-49db-9988-d082dbf839d0
+  name "Achieve [PumpOn When HighWater]"
+  definition ""
+  refinedby detected, on_when_detected
+
+  
+end
 declare goal
   id on_when_detected
   name "Achieve [PumpOn When LevelDetected]"
+  definition ""
+  
+  
 end

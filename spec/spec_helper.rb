@@ -19,6 +19,10 @@ module Helpers
     Agora::Model.load(examples_folder/"minepump.json")
   end
 
+  def fixture_model
+    Agora::Model.load(fixtures/"model.kaos")
+  end
+
   extend(self)
 end
 

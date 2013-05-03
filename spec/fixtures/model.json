@@ -1,8 +1,13 @@
-{
-  "agents": [
-    { "id":   "sensor",
-      "name": "Sensor",
-      "description": "The sensor agent",
-      "type": "environment" }
-  ]
+{"goals":[{"id":"detected","name":"Achieve [LevelDetected When High]","definition":null},{"id":"0785e640-05bf-49db-9988-d082dbf839d0","name":"Achieve [PumpOn When HighWater]","definition":null},{"id":"on_when_detected","name":"Achieve [PumpOn When LevelDetected]","definition":null}]
+,"domain_properties":[]
+,"domain_hypotheses":[]
+,"refinements":[{"id":"6385b4c0-d113-48fb-9ecd-cf8132991bea","parent":"0785e640-05bf-49db-9988-d082dbf839d0"}]
+,"refinement_children":[{"refinement":"6385b4c0-d113-48fb-9ecd-cf8132991bea","child":"detected"},{"refinement":"6385b4c0-d113-48fb-9ecd-cf8132991bea","child":"on_when_detected"}]
+,"obstacles":[]
+,"obstructions":[]
+,"resolutions":[]
+,"agents":[{"id":"sensor","name":"Sensor","description":"The sensor agent","type":"None"}]
+,"assignments":[{"id":"cb742106-150e-4852-bc50-9941d3cfa777","goal":"detected","agent":"sensor"}]
+,"predicates":[]
+,"insystem":[]
 }

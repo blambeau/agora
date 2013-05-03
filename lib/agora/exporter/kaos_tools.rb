@@ -7,22 +7,46 @@ module Agora
         model.agents
       end
 
+      def structure(rel, as)
+        rel.group([:id], :children, allbut: true).group([:children], as)
+      end
+
+      # Relation[id: String, refinedby: Relation[child: String]]
       def refinedby
-        refs   = model.refinements.group([:child], :children)
-                                  .group([:parent], :refinedby, allbut: true)
-                                  .rename(:parent => :id)
+        # 1) goals that are refined
+        #
+        # id: String, child: String, parent: String
+        refs = model.refinement_children[:child, id: :refinement]
+                    .join(model.refinements)
+        # id: String, child: String
+        refs = refs[:child, id: :parent]
+        # id: String, refinedby: Relation[children: Relation[child: String]]
+        refs = structure(refs, :refinedby)
+
+        # 2) goals not refined
         norefs = model.goals[:id].not_matching(refs)
                    .extend(:refinedby => Relation::DUM)
+
+        # both
         refs + norefs
       end
 
+      # Relation[id: String, assignedto: Relation[child: String]]
       def assignedto
-        assign = model.assignments.rename(:agent => :child)
-                                  .group([:child], :children)
-                                  .group([:goal],  :assignedto, allbut: true)
-                                  .rename(:goal => :id)
+        # 1) goals that are assigned
+        #
+        # Relation[id: String, goal: String, agent: String]
+        assign = model.assignments
+        # Relation[id: String, child: String]
+        assign = assign[id: :goal, child: :agent]
+        # Relation[id: String, assignedto: Relation[children: Relation[child: String]]]
+        assign = structure(assign, :assignedto)
+
+        # 2) not assigned
         noassi = model.goals[:id].not_matching(assign)
                    .extend(:assignedto => Relation::DUM)
+
+        # both
         assign + noassi
       end
 
