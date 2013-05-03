@@ -2,6 +2,7 @@ module Agora
   class Model
 
     def ancestors(selection)
+      selection = Relation(selection) unless selection.is_a?(Relation)
       parents = (refinements =~ selection)
       if parents.empty?
         selection
