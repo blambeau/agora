@@ -4,7 +4,7 @@ module Agora
       include Exporter
 
       def call
-        buf << JSON.dump(model.to_hash)
+        buf << ::JSON.dump(model.to_hash)
       end
 
     end

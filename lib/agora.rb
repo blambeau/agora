@@ -1,5 +1,6 @@
 require_relative 'agora/version'
 require_relative 'agora/loader'
+require 'json'
 #
 # Agile Goal-Oriented Requirement Acquisition
 #

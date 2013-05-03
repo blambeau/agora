@@ -16,6 +16,16 @@ module Agora
   
     # Install command options
     options do |opt|
+      @output = :kaos
+      opt.on('--kaos', "Outputs result as a .kaos file") do
+        @output = :kaos
+      end
+      opt.on('--json', "Outputs result as a .json file") do
+        @output = :json
+      end
+      opt.on('--dot', "Outputs result as a graphviz .dot file") do
+        @output = :dot
+      end
       opt.on_tail("--help", "Show help") do
         raise Quickl::Help
       end
@@ -28,7 +38,7 @@ module Agora
     def execute(args)
       if args.size == 1
         model = Model.load(Path(args.first))
-        model.to_dot(STDOUT)
+        model.send("to_#{@output}".to_sym, STDOUT)
       else
         raise Quickl::InvalidArgument, "Useless arguments: #{args.join(' ')}"
       end
