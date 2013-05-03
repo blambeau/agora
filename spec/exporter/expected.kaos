@@ -25,13 +25,23 @@ declare goal
   name "Achieve [Mine Evacuated when Level Not Detected]"
 end
 declare goal
-  id e065b78d-ec62-4044-9bbc-8ecb1a2fef8a
+  id pumpon_automatically
+  name "Achieve [Pump Automatically Set On When Level Detected]"
+end
+declare goal
+  id pumpon_manually
+  name "Achieve [Pump Manually Set On When Level Detected]"
+end
+declare goal
+  id c6cb8239-4ed7-46a4-b0cf-626f9a81abd6
   name "Achieve [PumpOn When HighWater]"
   refinedby detected, on_when_detected, water_is_slow
 end
 declare goal
   id on_when_detected
   name "Achieve [PumpOn When LevelDetected]"
+  refinedby pumpon_automatically
+  refinedby pumpon_manually
 end
 # List of obstacles
 declare obstacle

@@ -29,7 +29,19 @@ end
 declare goal
   id on_when_detected
   name "Achieve [PumpOn When LevelDetected]"
+  refinedby pumpon_automatically
+  refinedby pumpon_manually
 end
+
+  declare goal
+    id pumpon_automatically
+    name "Achieve [Pump Automatically Set On When Level Detected]"
+  end
+
+  declare goal
+    id pumpon_manually
+    name "Achieve [Pump Manually Set On When Level Detected]"
+  end
 
 declare obstacle
   id not_detected

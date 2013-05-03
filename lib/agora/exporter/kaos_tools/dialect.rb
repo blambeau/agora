@@ -22,7 +22,8 @@ module Agora
         def doublestar(buf, fn)
           name = render(fn)
           what = evaluate(name)
-          what.each do |tuple|
+          what.to_a.each_with_index do |tuple,i|
+            buf << "  " if i != 0
             sysref   = tuple[:sysref]
             sysref   = sysref ? "[#{sysref}] " : " "
             children = tuple[:children].map{|t| t[:child]}

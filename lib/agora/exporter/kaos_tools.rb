@@ -32,20 +32,20 @@ module Agora
 
       # Relation[id: String, refinedby: Relation[child: String]]
       def refinedby
-        refs = model.refinement_children[:child, id: :refinement]
-                    .join(model.refinements)[:child, id: :parent]
-        structure(refs, :refinedby)
+        refs     = model.refinements
+        children = model.refinement_children.rename(:refinement => :id)
+        structure(refs * children, :refinedby)
       end
 
       # Relation[id: String, assignedto: Relation[child: String]]
       def assignedto
-        assign = model.assignments[id: :goal, child: :agent]
+        assign = model.assignments.rename(goal: :parent, agent: :child)
         structure(assign, :assignedto)
       end
 
       # Relation[id: String, obstructedby: Relation[child: String]]
       def obstructedby
-        obstructions = model.obstructions[id: :goal, child: :obstacle]
+        obstructions = model.obstructions.rename(goal: :parent, obstacle: :child)
         structure(obstructions, :obstructedby)
       end
 
@@ -56,14 +56,16 @@ module Agora
       end
 
       def resolvedby
-        resolutions = model.resolutions[id: :obstacle, child: :goal]
+        resolutions = model.resolutions.rename(obstacle: :parent, goal: :child)
         structure(resolutions, :resolvedby)
       end
 
     private
 
       def structure(rel, as)
-        match   = rel.group([:id], :children, allbut: true).group([:children], as)
+        match   = rel.group([:child], :children)
+                     .group([:parent], as, allbut: true)
+                     .rename(:parent => :id)
         nomatch = model.goals[:id].not_matching(match).extend(as => Relation::DUM)
         match + nomatch
       end
