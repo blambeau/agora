@@ -11,33 +11,19 @@ module Agora
       end
     end
 
-    def focus(selection)
-      # involved parent/child links
-      refs   = (self.refinements =~ selection[parent: :id]) \
-             & (self.refinements =~ selection[child: :id])
+    #
+    # Rule 1: no incomplete refinement
+    #
+    #   1.1 -> refinement_children += (model.refinement_children =~ sel.refinements)
+    #   1.2 -> goals += (model.goals =~ sel.refinement_children[id: :child])
+    #
+    # Rule 2: no hidden parent/child relationship
+    #
+    #   1.1 -> refinement_children += (model.refinements =~ sel.parent_child[parent: id])
+    #                               & (model.refinements =~ sel.parent_child[child: id])
+    #
 
-      # complete involved refinements
-      refs = (self.refinements =~ refs[:parent])
-
-      # goals involved in selected refinements
-      goals = (self.goals =~ refs[id: :parent]) \
-            + (self.goals =~ refs[id: :child])
-
-      # assignments for selected goals
-      assignments = (self.assignments =~ goals[goal: :id])
-
-      # agents in selected assignments
-      agents = (self.agents =~ assignments[id: :agent])
-
-      # insystems for selected goals only
-      insystem = (self.insystem =~ goals[goal: :id])
-
-      Model.new({  
-             agents: agents,
-              goals: goals,
-        refinements: refs,
-        assignments: assignments,
-           insystem: insystem})
+    def focus(sel)
     end
 
   end # class Model
