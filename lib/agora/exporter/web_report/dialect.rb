@@ -27,8 +27,8 @@ module Agora
           def image(x, buf)
             base64 = Base64.encode64(content_of(x))
             buf << %Q{<div class="model-img"><img src="data:image/png;base64,#{base64}"/></div>}
-          rescue
-            buf << %Q{<div class="model-img"><img src="data:image/png;base64,"/></div>}
+          # rescue
+          #   buf << %Q{<div class="model-img"><img src="data:image/png;base64,"/></div>}
           end
 
         end
