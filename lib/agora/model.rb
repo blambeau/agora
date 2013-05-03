@@ -71,7 +71,7 @@ module Agora
     end
 
     def self.load(file)
-      new Path(file).load
+      Importer.load(file)
     end
 
   end # class Model

@@ -1,0 +1,5 @@
+declare agent
+  id sensor
+  name "Sensor"
+  description "The sensor agent"
+end
