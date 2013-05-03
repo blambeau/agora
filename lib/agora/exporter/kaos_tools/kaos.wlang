@@ -2,8 +2,8 @@
 *{agent_declarations}{
   declare agent
     id +{id}
-    name "{name}
-    description "{description}
+    "{name}
+    "{description}
   end
 }
 
@@ -11,16 +11,16 @@
 *{domprop_declarations}{
   declare domprop
     id +{id}
-    name "{name}
-    definition "{definition}
+    "{name}
+    "{definition}
   end
 }
 
 *{domhyp_declarations}{
   declare domhyp
     id +{id}
-    name "{name}
-    definition "{definition}
+    "{name}
+    "{definition}
   end
 }
 
@@ -28,8 +28,8 @@
 *{goal_declarations}{
   declare goal
     id +{id}
-    name "{name}
-    definition "{definition}
+    "{name}
+    "{definition}
     **{refinedby}
     **{assignedto}
   end

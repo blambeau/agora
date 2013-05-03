@@ -4,40 +4,27 @@ declare agent
   name "Sensor"
   description "The sensor agent"
 end
-
 # List of domain descriptions (properties and hypotheses)
 declare domprop
   id water_is_wet
   name "Water is wet"
-  definition ""
 end
 declare domhyp
   id water_is_slow
   name "Water Level changes Slowly"
-  definition ""
 end
-
 # List of goals
 declare goal
   id detected
   name "Achieve [LevelDetected When High]"
-  definition ""
-  
   assignedto sensor
-
 end
 declare goal
   id 62bf66c9-123e-40a6-95c2-fad93d8237a1
   name "Achieve [PumpOn When HighWater]"
-  definition ""
   refinedby detected, on_when_detected, water_is_slow
-
-  
 end
 declare goal
   id on_when_detected
   name "Achieve [PumpOn When LevelDetected]"
-  definition ""
-  
-  
 end

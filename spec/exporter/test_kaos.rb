@@ -8,6 +8,10 @@ module Agora
 
       subject{ model.to_kaos }
 
+      # before do
+      #   puts subject
+      # end
+
       it{ should eq(expected) }
     end
 

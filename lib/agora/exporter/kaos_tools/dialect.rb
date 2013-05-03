@@ -13,7 +13,10 @@ module Agora
         include Helpers
 
         def quote(buf, fn)
-          buf << quotize(evaluate(fn) || "")
+          attrname = render(fn)
+          if value = evaluate(attrname)
+            buf << attrname << " " << quotize(value)
+          end
         end
 
         def doublestar(buf, fn)

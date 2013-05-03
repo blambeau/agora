@@ -4,7 +4,8 @@ module Agora
       include Exporter
 
       def call
-        Dialect.render(Path.dir/"kaos_tools/kaos.wlang", self, buf)
+        got = Dialect.render(Path.dir/"kaos_tools/kaos.wlang", self, buf)
+        got.gsub(/[ ]+\n/m, "\n").gsub(/^\n/, "")
       end
 
       ### AGENT declarations
