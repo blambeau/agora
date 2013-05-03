@@ -2,12 +2,7 @@ module Agora
   class Model
     include Typed
 
-    attribute :agents, Relation[
-      id:   String,
-      name: String,
-      description: String,
-      type: String
-    ]
+    ### IDEAL GOAL MODEL
 
     attribute :goals, Relation[
       id: String,
@@ -27,30 +22,50 @@ module Agora
       definition: String
     ]
 
+    attribute :refinements, Relation[
+      id: String,
+      parent: String,
+    ]
+
+    attribute :refinement_children, Relation[
+      refinement: String,
+      child: String,
+    ]
+
+    ### OBSTACLE ANALYSIS
+
     attribute :obstacles, Relation[
       id: String,
       name: String,
       definition: String
     ]
 
-    attribute :refinements, Relation[
-      id: String,
-      parent: String,
-      child: String,
-      sysref: String
+    attribute :obstructions, Relation[
+      goal: String,
+      obstacle: String
     ]
 
     attribute :resolutions, Relation[
-      obstacle: String,
-      goal: String
+      goal: String,
+      obstacle: String
+    ]
+
+    ### AGENT MODEL
+
+    attribute :agents, Relation[
+      id:   String,
+      name: String,
+      description: String,
+      type: String
     ]
 
     attribute :assignments, Relation[
       id: String,
       goal: String,
       agent: String,
-      sysref: String
     ]
+
+    ### OTHER ORTHOGONAL FEATURES
 
     attribute :predicates, Relation[
       id: String,
