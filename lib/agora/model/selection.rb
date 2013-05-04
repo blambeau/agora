@@ -16,6 +16,7 @@ module Agora
         end
         define_method(setter) do |value|
           return if value == @selection.send(getter)
+          #puts "Setting #{getter} to (#{@current_rule}):\n#{value}"
           @selection.send(setter, value)
           has_changed(getter)
         end
@@ -55,14 +56,23 @@ module Agora
       # No goal refinement without the parent goal and refinement children
       rule(:goal_refinements) do |sel, model|
         sel.goals += (model.goals =~ sel.goal_refinements[id: :parent])
-        sel.goal_refinement_children += (model.goal_refinement_children =~ sel.goal_refinements[:id])
+        sel.goal_refinement_children += (model.goal_refinement_children =~ sel.goal_refinements[refinement: :id])
       end
 
-      # No goal refinement children without the child
+      # No goal refinement children without the refinement itself and the child
       rule(:goal_refinement_children) do |sel, model|
+        sel.goal_refinements += (model.goal_refinements =~ sel.goal_refinement_children[id: :refinement])
         sel.goals += (model.goals =~ sel.goal_refinement_children[id: :child])
         sel.domain_properties += (model.domain_properties =~ sel.goal_refinement_children[id: :child])
         sel.domain_hypotheses += (model.domain_hypotheses =~ sel.goal_refinement_children[id: :child])
+      end
+
+      # No hidden parent/child relationship in goals
+      rule(:goals) do |sel, model|
+        parent_child = (model.goal_refinements.rename(id: :refinement) * model.goal_refinement_children)
+        parent_child = (parent_child =~ sel.goals[parent: :id]) \
+                     & (parent_child =~ sel.goals[child: :id])
+        sel.goal_refinement_children += (model.goal_refinement_children =~ parent_child)
       end
 
     private
@@ -75,7 +85,8 @@ module Agora
       def apply
         @applying = true
         until @to_apply.empty?
-          self.class.rules[@to_apply.shift].each do |rule|
+          @current_rule = @to_apply.shift
+          self.class.rules[@current_rule].each do |rule|
             rule.call(self, @model)
           end
         end

@@ -8,6 +8,7 @@ module Agora
       model.selection{|s|
         s.goals = (model.goals =~ Relation(name: ["Maintain[PumpOn If High Water Detected]",
                                                   "Maintain[PumpOn IIf Pump Switch On]"]))
+        s.assignments = (model.assignments =~ s.goals[goal: :id])
       }
     }
 
@@ -23,15 +24,13 @@ module Agora
 
     it{ should be_a(Model) }
 
-    pending{
-      it 'restrict goals as expected' do
-        subject.goals[:name].should eq(expected_goals)
-      end
+    it 'restrict goals as expected' do
+      subject.goals[:name].should eq(expected_goals)
+    end
 
-      it 'restrict agents as expected' do
-        subject.agents[:name].should eq(expected_agents)
-      end
-    }
+    it 'restrict agents as expected' do
+      subject.agents[:name].should eq(expected_agents)
+    end
 
   end
 end
