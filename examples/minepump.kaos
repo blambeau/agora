@@ -78,11 +78,12 @@ end
 declare goal
   name "Maintain[PumpOn If High Water Detected]"
   definition "When the high water level is detected, the pump is on"
-  refinedby "Maintain[Pump Switch On If High Water Detected]",
+  refinedby switch_pump_on,
             "Maintain[PumpOn IIf Pump Switch On]"
 end
 
 declare goal
+  id switch_pump_on
   name "Maintain[Pump Switch On If High Water Detected]"
   definition "When the high water level is detected, the pump switch is on"
   assignedto controller
