@@ -89,16 +89,24 @@ module Agora
       system: String
     ]
 
-    def selection
-      self.dup do |s|
-        yield(self, s)
-      end
-    end
-
     def self.load(file)
       Importer.load(file)
     end
 
+    def ancestors(selection)
+      selection = Relation(selection) unless selection.is_a?(Relation)
+      parents = (refinements =~ selection)
+      if parents.empty?
+        selection
+      else
+        selection + ancestors(parents[child: :parent])
+      end
+    end
+
+    def selection
+      Selection.new(self, &Proc.new).to_model
+    end
+
   end # class Model
 end # module Agora
-require_relative 'model/focus'
+require_relative 'model/selection'

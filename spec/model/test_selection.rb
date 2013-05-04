@@ -2,29 +2,36 @@ require 'spec_helper'
 module Agora
   describe Model, "selection" do
 
-    let(:model){ Model.load(file) }
-    let(:file){ Path.backfind("examples/minepump.json") }
+    let(:model){ minepump_model }
 
     subject{
-      model.selection{|m,s| s.agents = Relation::DUM }
+      model.selection{|s|
+        s.goals = (model.goals =~ Relation(name: ["Maintain[PumpOn If High Water Detected]",
+                                                  "Maintain[PumpOn IIf Pump Switch On]"]))
+      }
     }
 
-    it 'returns a Model' do
-      subject.should be_a(Model)
-    end
+    let(:expected_goals){
+      Relation(name: ["Maintain[PumpOn If High Water Detected]",
+                      "Maintain[PumpOn IIf Pump Switch On]",
+                      "Maintain[Pump Switch On If High Water Detected]"])
+    }
 
-    it 'does not touch the original model' do
-      subject
-      model.agents.should_not be_empty
-    end
+    let(:expected_agents){
+      Relation(name: ["SafetyController", "PumpActuator"])
+    }
 
-    it 'restrict agents as expected' do
-      subject.agents.should eq(Relation::DUM)
-    end
+    it{ should be_a(Model) }
 
-    it 'keeps non overrided attributes unchanged' do
-      subject.goals.should eq(model.goals)
-    end
+    pending{
+      it 'restrict goals as expected' do
+        subject.goals[:name].should eq(expected_goals)
+      end
+
+      it 'restrict agents as expected' do
+        subject.agents[:name].should eq(expected_agents)
+      end
+    }
 
   end
 end
