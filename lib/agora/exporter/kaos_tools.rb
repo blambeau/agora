@@ -27,23 +27,20 @@ module Agora
       ### GOAL declarations
 
       def goal_declarations
-        model.goals * refinedby * assignedto * obstructedby
+        model.goals * goals_refinedby * assignedto * obstructedby
       end
 
-      # Relation[id: String, refinedby: Relation[child: String]]
-      def refinedby
-        refs     = model.refinements
-        children = model.refinement_children.rename(:refinement => :id)
+      def goals_refinedby
+        refs     = model.goal_refinements
+        children = model.goal_refinement_children.rename(:refinement => :id)
         structure(refs * children, :refinedby, model.goals)
       end
 
-      # Relation[id: String, assignedto: Relation[child: String]]
       def assignedto
         assign = model.assignments.rename(goal: :parent, agent: :child)
         structure(assign, :assignedto, model.goals)
       end
 
-      # Relation[id: String, obstructedby: Relation[child: String]]
       def obstructedby
         obstructions = model.obstructions.rename(goal: :parent, obstacle: :child)
         structure(obstructions, :obstructedby, model.goals)
@@ -52,7 +49,13 @@ module Agora
       ### OBSTACLE declarations
 
       def obstacle_declarations
-        model.obstacles * resolvedby
+        model.obstacles * resolvedby * obstacles_refinedby
+      end
+
+      def obstacles_refinedby
+        refs     = model.obstacle_refinements
+        children = model.obstacle_refinement_children.rename(:refinement => :id)
+        structure(refs * children, :refinedby, model.obstacles)
       end
 
       def resolvedby

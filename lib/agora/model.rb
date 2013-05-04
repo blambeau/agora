@@ -22,12 +22,12 @@ module Agora
       definition: String
     ]
 
-    attribute :refinements, Relation[
+    attribute :goal_refinements, Relation[
       id: String,
       parent: String,
     ]
 
-    attribute :refinement_children, Relation[
+    attribute :goal_refinement_children, Relation[
       refinement: String,
       child: String,
     ]
@@ -38,6 +38,16 @@ module Agora
       id: String,
       name: String,
       definition: String
+    ]
+
+    attribute :obstacle_refinements, Relation[
+      id: String,
+      parent: String,
+    ]
+
+    attribute :obstacle_refinement_children, Relation[
+      refinement: String,
+      child: String,
     ]
 
     attribute :obstructions, Relation[

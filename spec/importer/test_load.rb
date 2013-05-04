@@ -13,8 +13,8 @@ module Agora
         subject.agents.size.should eq(1)
       end
 
-      it 'has expected refinements' do
-        subject.refinements.should be_a(Relation)
+      it 'has expected goal refinements' do
+        subject.goal_refinements.should be_a(Relation)
       end
     end
 

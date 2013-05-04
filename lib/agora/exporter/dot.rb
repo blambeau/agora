@@ -10,7 +10,7 @@ module Agora
         nodes = model.goals[:id, label: :name, kind: "goal"] \
               + model.domain_properties[:id, label: :name, kind: "domain-property"] \
               + model.domain_hypotheses[:id, label: :name, kind: "domain-hypothesis"] \
-              + model.refinements[:id, label: "", kind: "refinement"] \
+              + model.goal_refinements[:id, label: "", kind: "refinement"] \
               + model.assignments[:id, label: "", kind: "assignment"] \
               + (model.assignments[:id] *
                  model.agents[agent: :id, label: :name])[:label, id: ->{ "#{id}_ag" }, kind: "agent"]
@@ -19,8 +19,8 @@ module Agora
       end
 
       def edges
-        edges = model.refinements[from: :id,              to: :parent,     label: "", kind: "refinement"] \
-              + model.refinement_children[from: :child,   to: :refinement, label: "", kind: "none"] \
+        edges = model.goal_refinements[from: :id,              to: :parent,     label: "", kind: "refinement"] \
+              + model.goal_refinement_children[from: :child,   to: :refinement, label: "", kind: "none"] \
               + model.assignments[from: :id,              to: :goal,       label: "", kind: "assignment"] \
               + model.assignments[from: ->{ "#{id}_ag" }, to: :id,         label: "", kind: "none"]
         edges = (edges * EdgeAttributes).wrap([:from, :to, :kind], :attributes, allbut: true)

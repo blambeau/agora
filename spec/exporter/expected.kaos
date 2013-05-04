@@ -47,6 +47,8 @@ end
 declare obstacle
   id not_detected
   name "Level Never Detected"
+  refinedby not_detected_sensor_broken
+  refinedby not_detected_sensor_not_calibrated
   resolvedby evacuate_mine
 end
 declare obstacle
