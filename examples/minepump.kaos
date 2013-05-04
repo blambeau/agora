@@ -7,18 +7,21 @@
 #  description: KAOS Analysis for The Mine Pump Case Study
 
 declare agent
+  id water_sensor
   name "HighWaterSensor"
   description "Legacy sensor for measuring water level"
   #kind "environment"
 end
 
 declare agent
+  id actuator
   name "PumpActuator"
   description "Legacy actuator for pumps"
   #type "environment"
 end
 
 declare agent
+  id controller
   name "SafetyController"
   definition "Software to develop to control the pumps inside the mine"
   #type "software"
@@ -69,7 +72,7 @@ end
 declare goal
   name "Maintain[High Water Detected]"
   definition "Each sump will be be equipped with water-level sensors to detect when the water is above a high or below a low level."
-  assignedto "HighWaterSensor"
+  assignedto water_sensor
 end
 
 declare goal
@@ -82,11 +85,11 @@ end
 declare goal
   name "Maintain[Pump Switch On If High Water Detected]"
   definition "When the high water level is detected, the pump switch is on"
-  assignedto "SafetyController"
+  assignedto controller
 end
 
 declare goal
   name "Maintain[PumpOn IIf Pump Switch On]"
   definition "Every time the pump switch is on, the pump is on as well"
-  assignedto "PumpActuator"
+  assignedto actuator
 end

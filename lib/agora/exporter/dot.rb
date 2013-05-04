@@ -12,7 +12,7 @@ module Agora
               + model.domain_hypotheses[:id, label: :name, kind: "domain-hypothesis"] \
               + model.goal_refinements[:id, label: "", kind: "refinement"] \
               + model.assignments[:id, label: "", kind: "assignment"] \
-              + (model.assignments[:id] *
+              + (model.assignments[:id, :agent] *
                  model.agents[agent: :id, label: :name])[:label, id: ->{ "#{id}_ag" }, kind: "agent"]
         nodes = (nodes * NodeAttributes).wrap([:id, :kind], :attributes, allbut: true)
         nodes
