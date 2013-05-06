@@ -3,7 +3,7 @@ module Agora
   class Model
     describe Helpers, "goals_parent_child" do
 
-      let(:model){ fixture_model }
+      let(:model){ fixture_model(:json) }
 
       subject{
         model.goals_parent_child.restrict(parent: "pumpon_when_highwater")[:parent, :child] 

@@ -12,9 +12,21 @@ module Agora
         parents = (goals_parent_child =~ goals[child: :id])[id: :parent]
         parents.empty? ? goals : goals + goal_ancestor_ids(parents, max, n+1)
       end
+      private :goal_ancestor_ids
 
       def goal_ancestors(goals, max = 1_000_000, n = 0)
         self.goals =~ goal_ancestor_ids(goals[:id], max, n)
+      end
+
+      def goal_descendant_ids(goals, max = 1_000_000, n = 0)
+        return goals if n >= max
+        children = (goals_parent_child =~ goals[parent: :id])[id: :child]
+        children.empty? ? goals : goals + goal_descendant_ids(children, max, n+1)
+      end
+      private :goal_descendant_ids
+
+      def goal_descendants(goals, max = 1_000_000, n = 0)
+        self.goals =~ goal_descendant_ids(goals[:id], max, n)
       end
 
     end # module Helpers

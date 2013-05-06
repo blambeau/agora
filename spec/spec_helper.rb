@@ -19,8 +19,8 @@ module Helpers
     Agora::Model.load(examples_folder/"minepump.json")
   end
 
-  def fixture_model
-    Agora::Model.load(fixtures/"model.kaos")
+  def fixture_model(kind = "kaos")
+    Agora::Model.load(fixtures/"model.#{kind}")
   end
 
   extend(self)

@@ -1,12 +1,12 @@
 require 'spec_helper'
 module Agora
   class Model
-    describe Helpers, "goal_ancestors" do
+    describe Helpers, "goal_descendants" do
 
       let(:model){ fixture_model(:json) }
 
       subject{
-        model.goal_ancestors(model.goals.restrict(id: "pumpon_automatically"))
+        model.goal_descendants(model.goals.restrict(id: "pumpon_when_highwater"))
       }
 
       it 'shoud have expected resulting type' do
@@ -17,9 +17,11 @@ module Agora
 
       it 'should have expected ids' do
         expected = Relation([
-          {id: "pumpon_automatically"},
+          {id: "pumpon_when_highwater"},
+          {id: "detected"},
           {id: "on_when_detected"},
-          {id: "pumpon_when_highwater"}
+          {id: "pumpon_automatically"},
+          {id: "pumpon_manually"}
         ])
         subject[:id].should eq(expected)
       end
