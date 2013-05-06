@@ -1,6 +1,7 @@
 module Agora
   class Model
     class Selection
+      include Rules
 
       def initialize(model)
         @model = model
@@ -16,7 +17,6 @@ module Agora
         end
         define_method(setter) do |value|
           return if value == @selection.send(getter)
-          #puts "Setting #{getter} to (#{@current_rule}):\n#{value}"
           @selection.send(setter, value)
           has_changed(getter)
         end
@@ -25,21 +25,6 @@ module Agora
       def to_model
         @selection
       end
-
-      module Rules
-
-        def rules
-          @rules ||= Hash.new{|h,k| h[k] = []}
-        end
-
-        def rule(*ons, &bl)
-          ons.each do |on|
-            rules[on] << bl
-          end
-        end
-
-      end
-      extend Rules
 
       # No assignment without the corresponding agent and goal
       rule(:assignments) do |sel,model|
@@ -73,25 +58,6 @@ module Agora
         parent_child = (parent_child =~ sel.goals[parent: :id]) \
                      & (parent_child =~ sel.goals[child: :id])
         sel.goal_refinement_children += (model.goal_refinement_children =~ parent_child)
-      end
-
-    private
-
-      def has_changed(who)
-        @to_apply << who
-        apply unless @applying
-      end
-
-      def apply
-        @applying = true
-        until @to_apply.empty?
-          @current_rule = @to_apply.shift
-          self.class.rules[@current_rule].each do |rule|
-            rule.call(self, @model)
-          end
-        end
-      ensure
-        @applying = false
       end
 
     end # class Selection
