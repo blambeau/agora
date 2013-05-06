@@ -22,6 +22,18 @@ module Agora
         end
       end
 
+      def with_ancestors(max = 1000000)
+        self.goals += @model.goal_ancestors(self.goals, max)
+      end
+
+      def with_descendants(max = 1000000)
+        self.goals += @model.goal_descendants(self.goals, max)
+      end
+
+      def with_assignments
+        self.assignments += (@model.assignments =~ self.goals[goal: :id])
+      end
+
       def to_model
         @selection
       end
