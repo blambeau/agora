@@ -10,7 +10,7 @@ module Agora
         yield(self) if block_given?
       end
 
-      Model.attributes.each_pair do |name, type|
+      Model.each_attribute do |name, type|
         getter, setter = name.to_sym, "#{name}=".to_sym
         define_method(getter) do
           @selection.send(getter)

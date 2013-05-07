@@ -49,6 +49,10 @@ module Agora
         @attributes ||= {}
       end
 
+      def each_attribute(&bl)
+        attributes.each_pair(&bl)
+      end
+
       def attribute(name, type)
         attributes[name] = type
         define_method(name){

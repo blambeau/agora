@@ -8,7 +8,7 @@ module Agora
 
       def -(other)
         select do |s|
-          Model.attributes.each_pair do |name,_|
+          Model.each_attribute do |name,_|
             s.send("#{name}=", self.send(name) - other.send(name))
           end
         end
@@ -16,7 +16,7 @@ module Agora
 
       def +(other)
         select do |s|
-          Model.attributes.each_pair do |name,_|
+          Model.each_attribute do |name,_|
             s.send("#{name}=", self.send(name) + other.send(name))
           end
         end
