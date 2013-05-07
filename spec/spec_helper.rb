@@ -15,8 +15,8 @@ module Helpers
     examples_folder.glob("*.json")
   end
 
-  def minepump_model
-    Agora::Model.load(examples_folder/"minepump.json")
+  def minepump_model(kind = "json")
+    Agora::Model.load(examples_folder/"minepump/minepump.#{kind}")
   end
 
   def fixture_model(kind = "kaos")
