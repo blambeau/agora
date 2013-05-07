@@ -2,10 +2,9 @@ module Agora
   class Model
     module Operators
 
-      def selection
+      def select
         Selection.new(self, &Proc.new).to_model
       end
-      alias :select :selection
 
     end # module Operators
     include Operators

@@ -1,11 +1,11 @@
 require 'spec_helper'
 module Agora
-  describe Model, "selection" do
+  describe Model, "select" do
 
     let(:model){ minepump_model }
 
     subject{
-      model.selection{|s|
+      model.select{|s|
         s.goals = (model.goals =~ Relation(name: ["Maintain[PumpOn If High Water Detected]",
                                                   "Maintain[PumpOn IIf Pump Switch On]"]))
         s.assignments = (model.assignments =~ s.goals[goal: :id])
