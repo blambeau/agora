@@ -5,7 +5,7 @@ module Agora
       x.extend(ClassMethods)
     end
 
-    def initialize(h)
+    def initialize(h = {})
       self.class.attributes.each_pair do |attrname,attrtype|
         value = h[attrname] || h[attrname.to_s]
         value = Relation::DUM if value.nil? and attrtype <= Alf::Relation
