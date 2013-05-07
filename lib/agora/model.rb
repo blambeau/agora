@@ -93,12 +93,9 @@ module Agora
       Importer.load(file)
     end
 
-    def selection
-      Selection.new(self, &Proc.new).to_model
-    end
-
     require_relative 'model/helpers'
     include Helpers
   end # class Model
 end # module Agora
 require_relative 'model/selection'
+require_relative 'model/operators'
