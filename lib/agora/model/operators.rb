@@ -7,11 +7,19 @@ module Agora
       end
 
       def -(other)
-        select{|s|
+        select do |s|
           Model.attributes.each_pair do |name,_|
             s.send("#{name}=", self.send(name) - other.send(name))
           end
-        }
+        end
+      end
+
+      def +(other)
+        select do |s|
+          Model.attributes.each_pair do |name,_|
+            s.send("#{name}=", self.send(name) + other.send(name))
+          end
+        end
       end
 
     end # module Operators
