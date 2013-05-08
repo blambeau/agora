@@ -2,7 +2,8 @@
 declare agent
   id sensor
   name "Sensor"
-  description "The sensor agent"
+  definition "The sensor agent"
+  type environment
 end
 # List of domain descriptions (properties and hypotheses)
 declare domprop

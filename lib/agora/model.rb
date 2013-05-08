@@ -65,7 +65,7 @@ module Agora
     attribute :agents, Relation[
       id:   String,
       name: String,
-      description: String,
+      definition: String,
       type: String
     ]
 

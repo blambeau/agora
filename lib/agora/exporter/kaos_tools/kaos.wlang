@@ -3,7 +3,8 @@
   declare agent
     id +{id}
     "{name}
-    "{description}
+    "{definition}
+    type +{type}
   end
 }
 

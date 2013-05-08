@@ -9,25 +9,26 @@
 declare agent
   id water_sensor
   name "HighWaterSensor"
-  description "Legacy sensor for measuring water level"
-  #kind "environment"
+  definition "Legacy sensor for measuring water level"
+  type environment
 end
 
 declare agent
   id actuator
   name "PumpActuator"
-  description "Legacy actuator for pumps"
-  #type "environment"
+  definition "Legacy actuator for pumps"
+  type environment
 end
 
 declare agent
   id controller
   name "SafetyController"
   definition "Software to develop to control the pumps inside the mine"
-  #type "software"
+  type software
 end
 
 declare goal
+  id avoid_miners_in_flooded_mine
   name "Avoid[Miners In FloodedMine]"
   definition "Miners may never be blocked in a flooded mine"
   refinedby "DomHyp[Sumps Well Distributed]", "Maintain[Sump Pumped Out If High Water]"

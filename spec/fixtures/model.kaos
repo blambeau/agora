@@ -1,7 +1,8 @@
 declare agent
   id sensor
   name "Sensor"
-  description "The sensor agent"
+  definition "The sensor agent"
+  type environment
 end
 
 declare domhyp

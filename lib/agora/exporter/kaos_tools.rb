@@ -5,7 +5,8 @@ module Agora
 
       def call
         got = Dialect.render(Path.dir/"kaos_tools/kaos.wlang", self, buf)
-        got.gsub(/[ ]+\n/m, "\n").gsub(/^\n/, "")
+        got.gsub!(/[ ]+\n/m, "\n").gsub!(/^\n/, "") if got.respond_to?(:gsub!)
+        got
       end
 
       ### AGENT declarations
