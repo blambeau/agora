@@ -1,15 +1,24 @@
 module Agora
   class Importer
 
-    Path.register_loader(".kaos") do |file|
+    def self.kaos(path)
       unless exporter = ENV['KAOSTOOLS_RELATIONAL_EXPORTER']
         raise "Unable to use KAOSTools, please set KAOSTOOLS_RELATIONAL_EXPORTER"
       end
-      ::JSON.load `mono --debug #{exporter} #{file}`
+      Model.new ::JSON.load(`mono --debug "#{exporter}" "#{path}"`)
     end
 
-    def self.load(path)
-      Model.new Path(path).load
+    def self.json(path)
+      Model.new ::JSON.load(path.read)
+    end
+
+    def self.load(path, format = nil)
+      format ||= format_from_ext(path)
+      send(format, path)
+    end
+
+    def self.format_from_ext(path)
+      path.ext.to_sym
     end
 
   end # class Importer

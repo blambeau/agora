@@ -89,8 +89,8 @@ module Agora
       system: String
     ]
 
-    def self.load(file)
-      Importer.load(file)
+    def self.load(file, format = nil)
+      Importer.load(file, format)
     end
 
     require_relative 'model/helpers'
