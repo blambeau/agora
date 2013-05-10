@@ -8,64 +8,64 @@
 
 declare agent
   id water_sensor
-  name "HighWaterSensor"
+  name "High-Water Sensor"
   definition "Legacy sensor for measuring water level"
   type environment
 end
 
 declare agent
   id actuator
-  name "PumpActuator"
+  name "Pump Actuator"
   definition "Legacy actuator for pumps"
   type environment
 end
 
 declare agent
   id controller
-  name "SafetyController"
+  name "Safety Controller"
   definition "Software to develop to control the pumps inside the mine"
   type software
 end
 
 declare goal
   id avoid_miners_in_flooded_mine
-  name "Avoid[Miners In FloodedMine]"
+  name "Avoid [Miners In FloodedMine]"
   definition "Miners may never be blocked in a flooded mine"
-  refinedby "DomHyp[Sumps Well Distributed]", "Maintain[Sump Pumped Out If High Water]"
+  refinedby "DomHyp [Sumps Well Distributed]", "Maintain [Sump Pumped Out If High Water]"
 end
 
 declare domhyp
-  name "DomHyp[Sumps Well Distributed]"
+  name "DomHyp [Sumps Well Distributed]"
   definition "By hypothesis, mine sumps are well distributed"
 end
 
 declare goal
-  name "Maintain[Sump Pumped Out If High Water]"
+  name "Maintain [Sump Pumped Out If High Water]"
   definition "When the water level is high, sumps are always pumped out so that miner are never blocked inside a pumped mine."
-  refinedby "Maintain[PumpOn If High Water]",
-            "DomHyp[Water Pumped Out If PumpOn]",
-            "DomHyp[Sufficient Pump Capacity]",
-            "DomHyp[No Excessive Water Flow]"
+  refinedby "Maintain [PumpOn If High Water]",
+            "DomHyp [Water Pumped Out If PumpOn]",
+            "DomHyp [Sufficient Pump Capacity]",
+            "DomHyp [No Excessive Water Flow]"
 end
 
 declare domhyp
-  name "DomHyp[Water Pumped Out If PumpOn]"
+  name "DomHyp [Water Pumped Out If PumpOn]"
   definition "By hypothesis, we consider that if a pump is on, it pumps water out"
 end
 
 declare domhyp
-  name "DomHyp[Sufficient Pump Capacity]"
+  name "DomHyp [Sufficient Pump Capacity]"
   definition "By hypothesis, we consider that the mine is sufficiently equiped with well chosen pump capacities"
 end
 
 declare domhyp
-  name "DomHyp[No Excessive Water Flow]"
+  name "DomHyp [No Excessive Water Flow]"
   definition "By hypothesis, we consider that the water flow is not excessive according to the number of pumps in the mine"
 end
 
 declare goal
   id pumpon_when_highwater
-  name "Maintain[PumpOn If High Water]"
+  name "Maintain [PumpOn If High Water]"
   definition "When the water level is high, the pump must be on."
   refinedby highwater_detected,
             pumpon_when_highwater_detected
@@ -73,28 +73,28 @@ end
 
 declare goal
   id highwater_detected
-  name "Maintain[High Water Detected]"
+  name "Maintain [High Water Detected]"
   definition "Each sump will be be equipped with water-level sensors to detect when the water is above a high or below a low level."
   assignedto water_sensor
 end
 
 declare goal
   id pumpon_when_highwater_detected
-  name "Maintain[PumpOn If High Water Detected]"
+  name "Maintain [PumpOn If High Water Detected]"
   definition "When the high water level is detected, the pump is on"
   refinedby switch_pump_on,
-            "Maintain[PumpOn IIf Pump Switch On]"
+            "Maintain [PumpOn IIf Pump Switch On]"
 end
 
 declare goal
   id switch_pump_on
-  name "Maintain[Pump Switch On If High Water Detected]"
+  name "Maintain [Pump Switch On If High Water Detected]"
   definition "When the high water level is detected, the pump switch is on"
   assignedto controller
 end
 
 declare goal
-  name "Maintain[PumpOn IIf Pump Switch On]"
+  name "Maintain [PumpOn IIf Pump Switch On]"
   definition "Every time the pump switch is on, the pump is on as well"
   assignedto actuator
 end

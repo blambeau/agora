@@ -6,20 +6,20 @@ module Agora
 
     subject{
       model.select{|s|
-        s.goals = (model.goals =~ Relation(name: ["Maintain[PumpOn If High Water Detected]",
-                                                  "Maintain[PumpOn IIf Pump Switch On]"]))
+        s.goals = (model.goals =~ Relation(name: ["Maintain [PumpOn If High Water Detected]",
+                                                  "Maintain [PumpOn IIf Pump Switch On]"]))
         s.assignments = (model.assignments =~ s.goals[goal: :id])
       }
     }
 
     let(:expected_goals){
-      Relation(name: ["Maintain[PumpOn If High Water Detected]",
-                      "Maintain[PumpOn IIf Pump Switch On]",
-                      "Maintain[Pump Switch On If High Water Detected]"])
+      Relation(name: ["Maintain [PumpOn If High Water Detected]",
+                      "Maintain [PumpOn IIf Pump Switch On]",
+                      "Maintain [Pump Switch On If High Water Detected]"])
     }
 
     let(:expected_agents){
-      Relation(name: ["SafetyController", "PumpActuator"])
+      Relation(name: ["Safety Controller", "Pump Actuator"])
     }
 
     it{ should be_a(Model) }
