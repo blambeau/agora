@@ -8,7 +8,7 @@ module Agora
 
       module Helpers
 
-        def split_label(label, max = 20)
+        def split_label(label, max = 23)
           words, buf, cur = label.split(/\s/), "", 0
           until words.empty?
             word = words.shift
@@ -26,6 +26,12 @@ module Agora
       end
       include Helpers
 
+      def height(label)
+        return 0 if label.empty?
+        lines = 1 + label.scan('\n').length
+        0.2 + lines * 0.22
+      end
+
       def nodes
         h = self
         nodes = model.goals[:id, label: :name, kind: "goal"] \
@@ -36,6 +42,7 @@ module Agora
               + (model.assignments[:id, :agent] *
                  model.agents[agent: :id, label: :name])[:label, id: ->{ "#{id}_ag" }, kind: "agent"]
         nodes = nodes.extend(label: ->{ h.split_label(label) })
+        nodes = nodes.extend(height: ->{ h.height(label) })
         nodes = (nodes * NodeAttributes).wrap([:id, :kind], :attributes, allbut: true)
         nodes
       end

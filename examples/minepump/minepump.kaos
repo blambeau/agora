@@ -3,7 +3,7 @@
 #  version: 0.1.0
 #  authors:
 #    - Axel van Lamsweerde <axel.vanlamsweerde@uclouvain.be>
-#    - Bernard Lambeau <bernard.lambeau@uclouvain.be>
+#    - Bernard Lambeau <bernard.lambeau@uclouvain.be> (contributor)
 #  description: KAOS Analysis for The Mine Pump Case Study
 
 declare agent
