@@ -6,6 +6,10 @@ require 'json'
 #
 module Agora
 
+  Error       = Class.new(StandardError)
+  SyntaxError = Class.new(Error)
+  UnrecognizedFormatError = Class.new(Error)
+
 end # module Agora
 require_relative 'agora/support'
 require_relative 'agora/importer'

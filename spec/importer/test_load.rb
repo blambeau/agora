@@ -32,5 +32,20 @@ module Agora
       it_should_behave_like "the fixture model"
     end
 
+    context 'on an invalid model' do
+      subject{
+        Model.load(file, :kaos)
+      }
+      let(:file){
+        Path.tmpfile.tap{|f| f.write("declare") }
+      }
+
+      it 'should raise an error' do
+        lambda{
+          subject
+        }.should raise_error(Agora::SyntaxError, /Expected whitespace/)
+      end
+    end
+
   end
 end
