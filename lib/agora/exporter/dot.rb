@@ -32,16 +32,20 @@ module Agora
         0.2 + lines * 0.22
       end
 
+      def name2label(x)
+        h = self
+        x.extend(label: ->{ h.split_label(name || id) })
+      end
+
       def nodes
         h = self
-        nodes = model.goals[:id, label: :name, kind: "goal"] \
-              + model.domain_properties[:id, label: :name, kind: "domain-property"] \
-              + model.domain_hypotheses[:id, label: :name, kind: "domain-hypothesis"] \
+        agents = name2label(model.agents)[:label, agent: :id]
+        nodes = name2label(model.goals)[:id, :label, kind: "goal"] \
+              + name2label(model.domain_properties)[:id, :label, kind: "domain-property"] \
+              + name2label(model.domain_hypotheses)[:id, :label, kind: "domain-hypothesis"] \
               + model.goal_refinements[:id, label: "", kind: "refinement"] \
               + model.assignments[:id, label: "", kind: "assignment"] \
-              + (model.assignments[:id, :agent] *
-                 model.agents[agent: :id, label: :name])[:label, id: ->{ "#{id}_ag" }, kind: "agent"]
-        nodes = nodes.extend(label: ->{ h.split_label(label) })
+              + (model.assignments[:id, :agent] * agents)[:label, id: ->{ "#{id}_ag" }, kind: "agent"]
         nodes = nodes.extend(height: ->{ h.height(label) })
         nodes = (nodes * NodeAttributes).wrap([:id, :kind], :attributes, allbut: true)
         nodes
@@ -49,10 +53,10 @@ module Agora
 
       def edges
         h = self
-        edges = model.goal_refinements[from: :id,              to: :parent,     label: "", kind: "refinement"] \
-              + model.goal_refinement_children[from: :child,   to: :refinement, label: "", kind: "none"] \
-              + model.assignments[from: :id,              to: :goal,       label: "", kind: "assignment"] \
-              + model.assignments[from: ->{ "#{id}_ag" }, to: :id,         label: "", kind: "none"]
+        edges = model.goal_refinements[from: :id, to: :parent, label: "", kind: "refinement"] \
+              + model.goal_refinement_children[from: :child, to: :refinement, label: "", kind: "none"] \
+              + model.assignments[from: :id, to: :goal, label: "", kind: "assignment"] \
+              + model.assignments[from: ->{ "#{id}_ag" }, to: :id, label: "", kind: "none"]
         edges = edges.extend(label: ->{ h.split_label(label) })
         edges = (edges * EdgeAttributes).wrap([:from, :to, :kind], :attributes, allbut: true)
         edges
